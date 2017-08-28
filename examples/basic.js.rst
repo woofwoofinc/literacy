@@ -5,4 +5,4 @@ JavaScript blocks.
 
 .. code-block:: javascript
 
-    console.log('Hello, World!')
+    console.log('Hello, World!');

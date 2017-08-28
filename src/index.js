@@ -39,22 +39,20 @@
 //
 // .. code-block:: javascript
 
-    const fs = require('fs')
-    const stripBom = require('strip-bom')
+    const fs = require('fs');
 
     const loadFile = function(module, filename) {
-      var content = fs.readFileSync(filename, 'utf8')
-      content = stripBom(content)
+      let content = fs.readFileSync(filename).toString();
 
-      console.log(content)
-    }
+      console.log(content);
+    };
 
 // Add this ``.js.rst`` file extension handler to ``require.extensions``.
 //
 // .. code-block:: javascript
 
     if (require.extensions) {
-      require.extensions['.js.rst'] = loadFile
+      require.extensions['.js.rst'] = loadFile;
 
 // This is not enough unfortunately since although the ``.js.rst`` extension is
 // registered, the Node module loader isn't able to handle multi-part extensions.
@@ -79,11 +77,11 @@
 //
 // .. code-block:: javascript
 
-      const path = require('path')
-      const Module = require('module')
+      const path = require('path');
+      const Module = require('module');
 
       function findExtension(filename) {
-        var extensions = path.basename(filename).split('.')
+        let extensions = path.basename(filename).split('.');
 
 // Remove the initial dot from dotfiles. This means there can be filenames
 // consisting entirely of an extension, e.g. the ``.js.rst`` case is handled by
@@ -93,7 +91,7 @@
 // .. code-block:: javascript
 
         if (extensions[0] === '') {
-          extensions.shift()
+          extensions.shift();
         }
 
 // Start with the longest possible extension and work towards the shortest.
@@ -101,10 +99,10 @@
 // .. code-block:: javascript
 
         while (extensions.shift()) {
-          var current = '.' + extensions.join('.')
+          let current = '.' + extensions.join('.');
 
           if (Module._extensions[current]) {
-            return current
+            return current;
           }
         }
 
@@ -112,7 +110,7 @@
 //
 // .. code-block:: javascript
 
-        return '.js'
+        return '.js';
       }
 
 // Now we have ``findExtension``, finish by patching the module load itself.
@@ -126,19 +124,19 @@
 //
 // .. code-block:: javascript
 
-      const assert = require('assert').ok
-      const debug = Module._debug
+      const assert = require('assert').ok;
+      const debug = Module._debug;
 
       Module.prototype.load = function(filename) {
-        debug('load %j for module %j', filename, this.id)
+        debug('load %j for module %j', filename, this.id);
 
-        assert(!this.loaded)
-        this.filename = filename
-        this.paths = Module._nodeModulePaths(path.dirname(filename))
+        assert(!this.loaded);
+        this.filename = filename;
+        this.paths = Module._nodeModulePaths(path.dirname(filename));
 
-        const extension = findExtension(filename)
-        Module._extensions[extension](this, filename)
+        const extension = findExtension(filename);
+        Module._extensions[extension](this, filename);
 
-        this.loaded = true
-      }
+        this.loaded = true;
+      };
     }
