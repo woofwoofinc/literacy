@@ -54,7 +54,7 @@
 //
 // .. code-block:: javascript
 
-    const peg = require('pegjs')
+    const peg = require('pegjs');
     const rules = [
 
 // The grammar starts with the first rule. We take a line based approach in parsing
@@ -193,9 +193,9 @@
         }
       }
       `
-    ]
+    ];
 
-    const parser = peg.generate(rules.join(''))
+    const parser = peg.generate(rules.join(''));
 
 // Prep the content by detabing it to a tab stop of eight per the reStructuredText
 // specification. This also means that the grammar rules can assume there is no
@@ -203,16 +203,16 @@
 //
 // .. code-block:: javascript
 
-    const detab = require('detab')
+    const detab = require('detab');
 
     function extractJavaScript(content) {
-      const detabbed = detab(content, 8)
+      const detabbed = detab(content, 8);
 
 // Then parse the content.
 //
 // .. code-block:: javascript
 
-      const parsed = parser.parse(detabbed)
+      const parsed = parser.parse(detabbed);
 
 // Use the parser output blocks to select the lines which should be interpreted as
 // JavaScript and collect these for output.
@@ -227,9 +227,9 @@
 //
 // .. code-block:: javascript
 
-      var output = []
-      var indent = 0
-      var inJavaScript = false
+      let output = [];
+      let indent = 0;
+      let inJavaScript = false;
 
       parsed.forEach(function(line) {
 
@@ -244,8 +244,8 @@
 // .. code-block:: javascript
 
         if (inJavaScript && typeof line.indent !== 'undefined' && line.indent <= indent) {
-          inJavaScript = false
-          indent = 0
+          inJavaScript = false;
+          indent = 0;
         }
 
 // If the current line classification is for a marker directive line, set
@@ -254,8 +254,8 @@
 // .. code-block:: javascript
 
         if (line.type === 'javascript') {
-          inJavaScript = true
-          indent = line.indent
+          inJavaScript = true;
+          indent = line.indent;
         }
 
 // If we are currently in a JavaScript block and the line has text then include
@@ -267,11 +267,11 @@
 // .. code-block:: javascript
 
         if (inJavaScript && typeof line.text !== 'undefined') {
-          output.push(line.text)
+          output.push(line.text);
         }
-      })
+      });
 
-      return output.join('\n')
+      return output.join('\n');
     }
 
 
@@ -315,8 +315,8 @@
     const fs = require('fs');
 
     const loadFile = function(module, filename) {
-      let content = fs.readFileSync(filename).toString();
-      let javaScript = extractJavaScript(content);
+      const content = fs.readFileSync(filename).toString();
+      const javaScript = extractJavaScript(content);
 
       module._compile(javaScript, filename);
     }
@@ -373,7 +373,7 @@
 // .. code-block:: javascript
 
         while (extensions.shift()) {
-          let current = '.' + extensions.join('.');
+          const current = '.' + extensions.join('.');
 
           if (Module._extensions[current]) {
             return current;
