@@ -11,6 +11,9 @@
   "bin": {
     "literacy": "./bin/literacy.js"
   },
+  "scripts": {
+    "build": "literacy src --out-dir lib --copy-files"
+  },
   "dependencies": {
     "detab": "^2.0.1",
     "fs-extra": "^4.0.1",
