@@ -60,24 +60,37 @@ Multiple file paths and even directories can be specified in the command line.
 
     $ literacy examples/blocks.js.rst examples/basic.js.rst src
 
-To output to a file, use `--out-file` or `-o`.
+To output to a file, use `--out-file`.
 
     $ literacy examples/blocks.js.rst --out-file blocks.js
 
 The `.js.rst` files from an entire source directory can be processed and output
 to another directory retaining the relative path prefixes. This doesn’t
-overwrite any other files or directories in the output.
+overwrite any other files or directories in the output. Use `-out-dir` to
+specify an output directory.
 
     $ literacy --out-dir lib src
 
 To also copy the files which are not `.js.rst` files from the source directory
-to the output directory, include the `--copy-files`` option.
+to the output directory, include the `--copy-files` option.
 
     $ literacy --copy-files --out-dir lib src
 
 For other command options and usage, use `--help`.
 
     $ literacy --help
+    
+    Literate programming in JavaScript using reStructuredText. This command extracts
+    code blocks from `.js.rst` reStructuredText files.
+    
+    Usage: bin/literacy.js [options] <paths>
+    
+    Options:
+      -o, --out-file    Compile to a single output file                     [string]
+      -d, --out-dir     Compile to an output directory                      [string]
+      -D, --copy-files  Copy non-js.rst files to output directory          [boolean]
+      -h, --help        Show help                                          [boolean]
+      -v, --version     Show version number                                [boolean]
 
 
 License

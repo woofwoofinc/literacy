@@ -6,8 +6,8 @@ project = u'Literacy'
 copyright = u'2017, Woof Woof, Inc.'
 author = u'Woof Woof, Inc.'
 
-version = '0.1.0'
-release = '0.1.0'
+version = '0.1.3'
+release = '0.1.3'
 
 templates_path = ['_templates']
 exclude_patterns = ['_build']

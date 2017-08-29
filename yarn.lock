@@ -181,6 +181,18 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
+literacy@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/literacy/-/literacy-0.1.2.tgz#6cae00619ddaaab87e20c5bc90c50a536e08285a"
+  dependencies:
+    detab "^2.0.1"
+    fs-extra "^4.0.1"
+    glob "^7.1.2"
+    lodash "^4.17.4"
+    node-dir "^0.1.17"
+    pegjs "^0.10.0"
+    yargs "^8.0.2"
+
 load-json-file@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-2.0.0.tgz#7947e42149af80d696cbf797bcaabcfe1fe29ca8"

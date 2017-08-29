@@ -33,6 +33,7 @@ Then publish.
 ::
 
     $ npm publish
+    + literacy@0.1.2
 
 The latest version of the Literacy package can be verified in the npm registry
 at `literacy`_.
