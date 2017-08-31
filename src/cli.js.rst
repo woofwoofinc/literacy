@@ -23,11 +23,12 @@ help. The options and names follow the `babel-cli`_ tool.
 
     const argv = require('yargs')
       .usage(
-        `
-        Literate programming in JavaScript using reStructuredText. This command extracts
-        code blocks from \`.js.rst\` reStructuredText files.
-
-        Usage: $0 [options] <path>`
+        '\n' +
+        'Literate programming in JavaScript using reStructuredText. This ' +
+        'command extracts code blocks from \`.js.rst\` reStructuredText ' +
+        'files.\n' +
+        '\n' +
+        'Usage: $0 [options] <paths>'
       )
 
 Require at least one input parameter. The Literacy command does not support
@@ -41,7 +42,7 @@ To specify output generation to a single file use ``--out-file``.
 
 .. code-block:: javascript
 
-      .describe('out-file', 'Compile to a single output file.')
+      .describe('out-file', 'Compile to a single output file')
       .string('out-file')
       .alias('o', 'out-file')
 
@@ -49,7 +50,7 @@ To specify output generation to a directory ``--out-dir``.
 
 .. code-block:: javascript
 
-      .describe('out-dir', 'Compile all files in a directory to an output directory.')
+      .describe('out-dir', 'Compile to an output directory')
       .string('out-dir')
       .alias('d', 'out-dir')
 
@@ -60,7 +61,7 @@ specified with the ``--copy-files`` flag.
 
 .. code-block:: javascript
 
-      .describe('copy-files', 'When compiling a directory copy non-js.rst files to output.')
+      .describe('copy-files', 'Copy non-js.rst files to output directory')
       .boolean('copy-files')
       .alias('D', 'copy-files')
 
@@ -281,7 +282,7 @@ generated JavaScript is written.
 
         console.log(`Output written to ${argv.outFile}.`);
       } else {
-        process.stdout.write(output);
+        console.log(output);
       }
     }
 

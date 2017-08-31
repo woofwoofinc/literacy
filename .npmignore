@@ -2,5 +2,6 @@ dev
 docs
 examples
 node_modules
+src
 *.iml
 .editorconfig
