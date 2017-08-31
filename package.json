@@ -1,7 +1,27 @@
 {
+  "name": "literacy",
+  "description": "Literate programming in JavaScript using reStructuredText.",
+  "version": "0.1.0",
+  "license": "(Apache-2.0 OR MIT)",
+  "homepage": "https://github.com/woofwoofinc/literacy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/woofwoofinc/literacy.git"
+  },
+  "bin": {
+    "literacy": "./bin/literacy.js"
+  },
   "dependencies": {
     "detab": "^2.0.1",
-    "pegjs": "^0.10.0"
+    "fs-extra": "^4.0.1",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.4",
+    "node-dir": "^0.1.17",
+    "pegjs": "^0.10.0",
+    "yargs": "^8.0.2"
   },
-  "license": "(Apache-2.0 OR MIT)"
+  "keywords": [
+    "literate",
+    "reStructuredText"
+  ]
 }

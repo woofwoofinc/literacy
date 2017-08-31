@@ -27,11 +27,15 @@
 //   locked so Node is committed to keeping the current form indefinitely.
 // - Production use cases are encouraged to precompile ``.js.rst`` sources.
 //
-// For ``.js.rst`` loads, read the file contents and strip the Unicode byte order
-// mark if it is present. Then use the parser defined in ``index.js`` to extract
-// the JavaScript codeblocks from the reStructuredText. This material is passed to
-// ``module._compile`` for compilation and incorporation into the running
-// environment.
+// .. code-block:: javascript
+
+    'use strict';
+
+//
+// For ``.js.rst`` loads, read the file contents and use the parser defined in
+// ``index.js`` to extract the JavaScript codeblocks from the reStructuredText.
+// This material is passed to ``module._compile`` for compilation and incorporation
+// into the running environment.
 //
 // .. code-block:: javascript
 

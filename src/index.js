@@ -2,6 +2,10 @@
 // ========
 // Literate programming in JavaScript using reStructuredText.
 //
+// .. code-block:: javascript
+
+    'use strict';
+
 //
 // Parser
 // ------
@@ -189,7 +193,7 @@
         return {
           type: 'text',
           indent: indent.length,
-          text: characters.join('')
+          text: indent.join('') + characters.join('')
         }
       }
       `

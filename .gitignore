@@ -5,3 +5,4 @@
 # Build artifacts
 docs/_build
 node_modules
+lib
