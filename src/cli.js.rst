@@ -263,7 +263,7 @@ the output.
       const filtered = inputs.filter(hasJsRstExtension);
 
       const outputs = filtered.map(function(filename) {
-        return literacy(filename);
+        return literacy.fromFile(filename);
       });
 
       const output = outputs.join('\n') + '\n';
@@ -331,7 +331,7 @@ The final output filename is generated joining to ``--out-dir`` and trimming the
           fs.ensureFileSync(outputFile);
 
           if (hasJsRstExtension(inputFile)) {
-            const output = literacy(inputFile) + '\n';
+            const output = literacy.fromFile(inputFile) + '\n';
             fs.writeFileSync(outputFile, output);
           } else if (argv.copyFiles) {
             fs.copySync(inputFile, outputFile);

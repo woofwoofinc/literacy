@@ -41,9 +41,9 @@ into the running environment.
     const literacy = require('./index.js');
 
     const loadFile = function(module, filename) {
-      const javaScript = literacy(filename);
+      const javaScript = literacy.fromFile(filename);
       module._compile(javaScript, filename);
-    }
+    };
 
 Add this ``.js.rst`` file extension handler to ``require.extensions``.
 

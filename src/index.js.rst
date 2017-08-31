@@ -211,16 +211,15 @@ Otherwise, the line is regular text with optional indentation.
 
 Exports
 -------
-The main Literacy interface takes a filename, parses it as a ``.js.rst`` file,
-and returns the JavaScript blocks concatenated together.
+Support converting string content from reStructuredText format to JavaScript.
+This parses the parameter string as a ``.js.rst`` file and returns the
+JavaScript blocks concatenated together.
 
 .. code-block:: javascript
 
-    const fs = require('fs');
     const detab = require('detab');
 
-    module.exports = function(filename) {
-      const content = fs.readFileSync(filename).toString();
+    module.exports.fromString = function(content) {
 
 Prep the content by detabing it to a tab stop of eight per the reStructuredText
 specification. This also means that the grammar rules can assume there is no
@@ -294,4 +293,15 @@ generated JavaScript.
       });
 
       return output.join('\n');
+    };
+
+Include a wrapper for processing ``.js.rst`` from a file directly.
+
+.. code-block:: javascript
+
+    const fs = require('fs');
+
+    module.exports.fromFile = function(filename) {
+      const content = fs.readFileSync(filename).toString();
+      return exports.fromString(content);
     };
