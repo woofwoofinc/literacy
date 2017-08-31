@@ -1,24 +1,7 @@
-
-
-
-
-
-
-
-     _____   __ __
-    |     |_|__|  |_.-----.----.---.-.----.--.--.
-    |       |  |   _|  -__|   _|  _  |  __|  |  |
-    |_______|__|____|_____|__| |___._|____|___  |
-                                          |_____|
-
-                                  Woof Woof, Inc.
-
+# ![Literary](https://raw.githubusercontent.com/woofwoofinc/literacy/master/docs/assets/title.png)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](https://github.com/woofwoofinc/literacy#license)
 
-
-Literacy
-========
 Literate programming in JavaScript using [reStructuredText].
 
 [reStructuredText]: http://docutils.sourceforge.net/rst.html
@@ -31,7 +14,7 @@ MIT Licence.
 
 You may licence this work under the Apache License, Version 2.0.
 
-    Copyright 2017 Woof Woof Web contributors
+    Copyright 2017 Woof Woof, Inc. contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -47,7 +30,7 @@ You may licence this work under the Apache License, Version 2.0.
 
 Alternatively, you may licence this work under the MIT Licence at your option.
 
-    Copyright (c) 2017 Woof Woof Web contributors
+    Copyright (c) 2017 Woof Woof, Inc. contributors
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
