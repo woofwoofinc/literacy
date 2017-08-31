@@ -76,6 +76,84 @@ For other command options and usage, use `--help`.
       -v, --version     Show version number                                [boolean]
 
 
+Require Hook
+------------
+For non-production use cases there is a require hook for including `.js.rst`
+files without specifying the suffix. This can be convenient for developing in
+source trees which use the `literacy` command to compile to `.js` files since
+the transpilation step can be omitted.
+
+Using a require hook in production code is not recommended practice.
+
+To use the hook, require it from the development run harness, e.g. inside a
+wrapper Yarn/NPM script.
+
+    require('literacy/lib/register');
+
+Then require `.js.rst` files as if they were `.js` files. The hook takes care
+of intercepting the extension and performing the JavaScript code block
+extraction before handing it to the Node module compiler.
+
+
+Webpack Loader
+--------------
+Literacy can be integrated with Webpack to support `.js.rst` processing. See the
+example project included at `example/webpack-literacy`.
+
+To incorporate Literacy into an existing Webpack project, first add the Literacy
+dependencies to the Webpack project.
+
+    npm install --save literacy
+    
+Or with Yarn:
+
+    yarn add literacy
+
+There isn't a separate module in the NPM registry for `literacy-loader`, it's
+included in the main `literacy` module. This means that Webpack needs to know
+where to resolve the loader before it can be used. For this, add the path to the
+`libs` directory in `literacy` to `modules.exports.resolveLoader.modules` in
+`webpack.config.js`.
+
+    // Load Literacy loader support for `.js.rst` files in Webpack.
+    resolveLoader: {
+      modules: ['node_modules', 'node_modules/literacy/lib']
+    }
+
+Webpack does not allow the `require.extension` hook so requiring `.js.rst`
+modules needs the file extension to be provided. Extensionless require can be
+enabled by adding `.js.rst` to the Webpack `modules.exports.resolve.extensions
+list.
+
+    // Enable `.js.rst` requires without suffix.
+    resolve: {
+      extensions: ['.js', '.json', '.js.rst']
+    }  
+
+Include a rule in `modules.exports.modules` for handing `.js.rst` files.
+
+    module: {
+      rules: [
+        {
+          test: /\.js\.rst/,
+          use: [
+            'literacy-loader'
+          ]
+        }
+      ]
+    }
+
+And we can now use `.js.rst` filenames where `.js` was used previously. For
+example, in the `modules.exports.entry` entrypoint.
+
+    entry: './src/index.js.rst'
+    
+If the `resolve.extensions` has been provided for `.js.rst`, then this line
+will work without the explicit extension.
+
+    entry: './src/index'
+
+
 License
 -------
 This work is dual-licensed under the Apache License, Version 2.0 and under the
