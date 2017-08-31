@@ -3,6 +3,7 @@
 *.oci
 
 # Build artifacts
+dist
 docs/_build
 node_modules
 lib
