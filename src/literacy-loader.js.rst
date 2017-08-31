@@ -28,4 +28,4 @@ Literacy module operation.
     module.exports = function(content) {
         this.cacheable && this.cacheable();
         return literacy.fromString(content);
-    }
+    };

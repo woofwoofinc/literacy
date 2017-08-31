@@ -1,5 +1,5 @@
-Literacy
-========
+.. image:: assets/title.png
+
 Literate programming in JavaScript using reStructuredText.
 
 
