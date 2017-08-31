@@ -63,8 +63,9 @@ the choices are matched in order.
 
 The grammar starts with the first rule. We take a line based approach in parsing
 and determine that the next read will be a line containing a code directive
-start line, a literal block start line, a minified literal block start line, a
-blank line, or a line of regular text.
+start line, a directive for something other than a code block, a literal block
+start line, a minified literal block start line, a blank line, or a line of
+regular text.
 
 Note that the order matters here since all the lines would match a regular line
 of text if they weren't before it in the choice list. This would be ambiguous in
@@ -72,7 +73,7 @@ a context-free grammar.
 
 .. code-block:: javascript
 
-      'START = (CODE_DIRECTIVE / LITERAL / MINIFIED_LITERAL / BLANK / TEXT)*',
+      'START = (CODE_DIRECTIVE / DIRECTIVE / LITERAL / MINIFIED_LITERAL / BLANK / TEXT)*',
 
 It is useful to include an explicit rule for a blank line of text. Usually, it
 would be essential for parsing reStructuredText since many elements are
@@ -135,11 +136,28 @@ equal indentation level.
       CODE_DIRECTIVE_NAME = 'code-block'i / 'sourcecode'i / 'code'i
       `,
 
+It is necessary to distinguish the other directives in reStructuredText since
+they end in ``::``. If these are not separately covered then they will be
+interpreted as code blocks by the fully minimized form of the literal block rule
+later.
+
+.. code-block:: javascript
+
+      `
+      DIRECTIVE = indent:[ ]* '.. ' [A-Za-z-]+ '::' BLANK {
+        return {
+          type: 'directive',
+          indent: indent.length,
+        }
+      }
+      `,
+
 A reStructuredText fully expanded literal block is ``::`` on a separate line.
-Usefully, this also covers the minified literal block case when the ``::`` is
-attached to the paragraph but on a separate line, e.g. the line in the
-paragraph was broken just before the concluding ``::``. This is an edge case
-that the minified literal block rule has difficulty handling.
+
+Aside, this also covers the minified literal block case when the ``::`` is
+attached to the paragraph but on a separate line, e.g. the line in the paragraph
+was broken just before the concluding ``::``. Both result in the same parse
+action response so this is not a problem.
 
 .. code-block:: javascript
 
@@ -153,30 +171,19 @@ that the minified literal block rule has difficulty handling.
       `,
 
 The minified literal case is more difficult because a negative lookahead is
-needed. The critical part is ``(. !(EOL / '::' BLANK))* . '::'``. Here the
-parenthesed expression says match any number of characters which aren't
-immediately followed by an end of line or by ``::`` followed by optional blank
-material and then the end of line.
+needed. The critical part is ``(!EOL !('::' BLANK) .)* '::'``. Here the
+parenthesed expression says match any number of characters on this line unless
+this are the beginning of ``::`` followed by optional blank material to the end
+of line.
 
 The ``EOL`` is needed in this negative look ahead since the parser is not line
 based naturally. If it was omitted then this rule would match most of the file
 greedily if there were any literal blocks in the file.
 
-The reason for the single character match before the ``::`` is that the
-character just before the ``::`` on the line won't have matched in the
-negative lookahead parenthesed expression. The ``!(EOL / '::' BLANK)`` says to
-fail the match of the character if it is followed by ``::`` and the end of line
-sequence.
-
-So it is necessary to include this character with a wildcard match. This is
-also why the literal rule matching a solitary ``::`` above is useful. The
-minified rule will fail in this case since there is no character for the
-wildcard to match.
-
 .. code-block:: javascript
 
       `
-      MINIFIED_LITERAL = indent:[ ]* (. !(EOL / '::' BLANK))* . '::' BLANK {
+      MINIFIED_LITERAL = indent:[ ]* (!EOL !('::' BLANK) .)* '::' BLANK {
         return {
           type: 'javascript',
           indent: indent.length,
