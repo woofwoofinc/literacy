@@ -126,7 +126,7 @@ equal indentation level.
 .. code-block:: javascript
 
       `
-      CODE_DIRECTIVE = indent:[ ]* '.. ' CODE_DIRECTIVE_NAME ':: javascript'i BLANK {
+      CODE_DIRECTIVE = indent:[ ]* '.. ' CODE_DIRECTIVE_NAME ':: javascript'i BLANK DIRECTIVE_OPTION* {
         return {
           type: 'javascript',
           indent: indent.length,
@@ -134,6 +134,29 @@ equal indentation level.
       }
 
       CODE_DIRECTIVE_NAME = 'code-block'i / 'sourcecode'i / 'code'i
+      `,
+
+Code block directives_ are allowed to take options.
+
+* ``:caption: <text>``
+* ``:emphasize-lines: <comma separated integer list>``
+* ``:linenos:``
+* ``:dedent: integer``
+* ``:number-lines:``
+
+.. _directives: http://docutils.sourceforge.net/docs/ref/rst/directives.html
+
+The common directive options are also supported.
+
+* ``:name: <text>``
+* ``:class: <text>``
+
+Directive options following a code directive are dropped completely.
+
+.. code-block:: javascript
+
+      `
+      DIRECTIVE_OPTION = indent:[ ]* ':' [A-Za-z-]+ ':' (!EOL .)* BLANK
       `,
 
 It is necessary to distinguish the other directives in reStructuredText since
