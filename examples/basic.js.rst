@@ -1,6 +1,6 @@
 Basic
 -----
-A basic example ``.js.rst`` file without complicated RestructuredText or broken
+A basic example ``.js.rst`` file without complicated reStructuredText or broken
 JavaScript blocks.
 
 .. code-block:: javascript
