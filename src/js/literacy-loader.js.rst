@@ -12,8 +12,6 @@ details.
 
 .. code-block:: javascript
 
-    'use strict';
-
     const literacy = require('./index');
 
 The Webpack documentation on `writing loaders`_ outlines how to implement a new
@@ -25,7 +23,10 @@ Literacy module operation.
 
 .. code-block:: javascript
 
-    module.exports = function(content) {
-        this.cacheable && this.cacheable();
+    module.exports = function exports(content) {
+        if (this.cacheable) {
+          this.cacheable();
+        }
+
         return literacy.fromString(content);
     };

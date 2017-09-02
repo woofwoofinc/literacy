@@ -6,8 +6,6 @@ code blocks instead of incorporating the require hook.
 
 .. code-block:: javascript
 
-    'use strict';
-
     const literacy = require('./index');
 
 
@@ -25,7 +23,7 @@ help. The options and names follow the `babel-cli`_ tool.
       .usage(
         '\n' +
         'Literate programming in JavaScript using reStructuredText. This ' +
-        'command extracts code blocks from \`.js.rst\` reStructuredText ' +
+        'command extracts code blocks from `.js.rst` reStructuredText ' +
         'files.\n' +
         '\n' +
         'Usage: $0 [options] <paths>'
@@ -103,17 +101,17 @@ to an array of non-wildcard paths.
 
     const glob = require('glob');
 
-    let filenames = []
+    let inputs = [];
 
-    argv._.forEach(function(input) {
-      let expanded = glob.sync(input);
+    argv._.forEach(input => {
+      const expanded = glob.sync(input);
 
-      if (expanded.length == 0) {
+      if (expanded.length === 0) {
         // The input path does not expand, include it unchanged.
-        filenames.push(input);
+        inputs.push(input);
       } else {
         // Otherwise just include the expansions.
-        filenames.push(...expanded);
+        inputs.push(...expanded);
       }
     });
 
@@ -124,7 +122,7 @@ individual path multiple times.
 
     const uniq = require('lodash/uniq');
 
-    filenames = uniq(filenames);
+    inputs = uniq(inputs);
 
 
 Validation
@@ -142,7 +140,7 @@ use manual validation for the conflict case where ``--out-file`` and
     const outDirFlagPresent = typeof argv.outDir !== 'undefined';
 
     if (outFileFlagPresent && outDirFlagPresent) {
-      errors.push("Cannot have --out-file and --out-dir.");
+      errors.push('Cannot have --out-file and --out-dir.');
     }
 
 Similarly, Yargs can detect when a flag is present without another flag which it
@@ -152,7 +150,7 @@ the case where ``--copy-files`` has been provided but not ``--out-dir``.
 .. code-block:: javascript
 
     if (argv['copy-files'] && !outDirFlagPresent) {
-      errors.push("--copy-files requires --out-dir.");
+      errors.push('--copy-files requires --out-dir.');
     }
 
 Verify the input paths exist.
@@ -161,9 +159,9 @@ Verify the input paths exist.
 
     const fs = require('fs-extra');
 
-    filenames.forEach(function(filename) {
-      if (!fs.existsSync(filename)) {
-        errors.push(`${filename} not found.`);
+    inputs.forEach(input => {
+      if (!fs.existsSync(input)) {
+        errors.push(`${ input } not found.`);
       }
     });
 
@@ -173,7 +171,7 @@ single error cause for this.
 .. code-block:: javascript
 
     if (errors.length) {
-      console.error(`ERROR: ${errors[0]}`);
+      console.error(`ERROR: ${ errors[0] }`);
       process.exit(1);
     }
 
@@ -188,9 +186,9 @@ the contents of directories recursively.
     const dir = require('node-dir');
 
     function enumerate(filename) {
-      let expanded = [filename];
+      let expanded = [ filename ];
       if (fs.statSync(filename).isDirectory()) {
-        expanded = dir.files(filename, {sync: true});
+        expanded = dir.files(filename, { sync: true });
       }
 
       return expanded;
@@ -204,14 +202,14 @@ entries.
 .. code-block:: javascript
 
     function enumerateAll(filenames) {
-      let all = [];
+      const enumerated = [];
 
-      filenames.forEach(function(filename) {
-        let expanded = enumerate(filename);
-        all.push(...expanded);
+      filenames.forEach(filename => {
+        const expanded = enumerate(filename);
+        enumerated.push(...expanded);
       });
 
-      return uniq(all);
+      return uniq(enumerated);
     }
 
 It is also convenient to test if a file has a ``.js.rst`` suffix.
@@ -268,14 +266,20 @@ the output.
 .. code-block:: javascript
 
     if (!outDirFlagPresent) {
-      const inputs = enumerateAll(filenames);
-      const filtered = inputs.filter(hasJsRstExtension);
+      const filenames = enumerateAll(inputs);
+      const filtered = filenames.filter(hasJsRstExtension);
 
-      const outputs = filtered.map(function(filename) {
-        return literacy.fromFile(filename);
-      });
+      const outputs = filtered.map(filename =>
+        literacy.fromFile(filename)
+      );
 
-      const output = outputs.join('\n') + '\n';
+      let output = outputs.join('\n');
+
+Ensure output ends with a newline.
+
+.. code-block:: javascript
+
+      output += '\n';
 
 The single combined output file and stdout output cases differ only in where the
 generated JavaScript is written.
@@ -285,12 +289,12 @@ generated JavaScript is written.
       if (outFileFlagPresent) {
         try {
           fs.writeFileSync(argv.outFile, output);
-        } catch(err) {
-          return console.log(err);
-        }
 
-        if (!argv['quiet']) {
-          console.log(`Output written to ${argv.outFile}.`);
+          if (!argv.quiet) {
+            console.log(`Output written to ${ argv.outFile }.`);
+          }
+        } catch (error) {
+          console.log(error);
         }
       } else {
         console.log(output);
@@ -331,7 +335,7 @@ The final output filename is generated joining to ``--out-dir`` and trimming the
 
     const path = require('path');
 
-    function process(inputFile, relativeOutputFile) {
+    function processFile(inputFile, relativeOutputFile) {
       try {
         if (hasJsRstExtension(inputFile) || argv.copyFiles) {
           let outputFile = path.join(argv.outDir, relativeOutputFile);
@@ -342,18 +346,20 @@ The final output filename is generated joining to ``--out-dir`` and trimming the
           fs.ensureFileSync(outputFile);
 
           if (hasJsRstExtension(inputFile)) {
-            const output = literacy.fromFile(inputFile) + '\n';
+            let output = literacy.fromFile(inputFile);
+            output += '\n';
+
             fs.writeFileSync(outputFile, output);
           } else if (argv.copyFiles) {
             fs.copySync(inputFile, outputFile);
           }
 
-          if (!argv['quiet']) {
-            console.log(`Output written to ${outputFile}.`);
+          if (!argv.quiet) {
+            console.log(`Output written to ${ outputFile }.`);
           }
         }
-      } catch (err) {
-        return console.log(err);
+      } catch (error) {
+        console.log(error);
       }
     }
 
@@ -362,7 +368,7 @@ Process each input path in turn.
 .. code-block:: javascript
 
     if (outDirFlagPresent) {
-      filenames.forEach(function(filename) {
+      inputs.forEach(input => {
 
 If the path is a directory path, then recursively enumerate the files in that
 directory and process each individually taking care to calculate the relative
@@ -370,12 +376,12 @@ output path from the base input directory path.
 
 .. code-block:: javascript
 
-        if (fs.statSync(filename).isDirectory()) {
-          let files = enumerate(filename);
+        if (fs.statSync(input).isDirectory()) {
+          const filenames = enumerate(input);
 
-          files.forEach(function(filename) {
-            process(filename, path.relative(path.dirname(filename), filename));
-          });
+          filenames.forEach(filename =>
+            processFile(filename, path.relative(path.dirname(filename), filename))
+          );
 
 Otherwise the path is a file and can be processed directly with its basename as
 the relative output path.
@@ -383,7 +389,7 @@ the relative output path.
 .. code-block:: javascript
 
         } else {
-          process(filename, path.basename(filename));
+          processFile(input, path.basename(input));
         }
       });
     }

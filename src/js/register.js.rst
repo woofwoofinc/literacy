@@ -27,10 +27,6 @@ Strictly speaking it should not be used. However:
   locked so Node is committed to keeping the current form indefinitely.
 - Production use cases are encouraged to precompile ``.js.rst`` sources.
 
-.. code-block:: javascript
-
-    'use strict';
-
 For ``.js.rst`` loads, read the file contents and use the parser defined in
 ``index.js.rst`` to extract the JavaScript codeblocks from the reStructuredText.
 This material is passed to ``module._compile`` for compilation and incorporation
@@ -40,10 +36,10 @@ into the running environment.
 
     const literacy = require('./index.js');
 
-    const loadFile = function(module, filename) {
+    function loadFile(module, filename) {
       const javaScript = literacy.fromFile(filename);
       module._compile(javaScript, filename);
-    };
+    }
 
 Add this ``.js.rst`` file extension handler to ``require.extensions``.
 
@@ -51,6 +47,7 @@ Add this ``.js.rst`` file extension handler to ``require.extensions``.
 
     if (require.extensions) {
       require.extensions['.js.rst'] = loadFile;
+    }
 
 This is not enough unfortunately since although the ``.js.rst`` extension is
 registered, the Node module loader isn't able to handle multi-part extensions.
@@ -75,11 +72,11 @@ This implementation follows the CoffeeScript directly.
 
 .. code-block:: javascript
 
-      const path = require('path');
-      const Module = require('module');
+    const path = require('path');
+    const Module = require('module');
 
-      function findExtension(filename) {
-        let extensions = path.basename(filename).split('.');
+    function findExtension(filename) {
+      const extensions = path.basename(filename).split('.');
 
 Remove the initial dot from dotfiles. This means there can be filenames
 consisting entirely of an extension, e.g. the ``.js.rst`` case is handled by
@@ -88,28 +85,28 @@ trimming the initial ``.`` and then putting it back before the test into
 
 .. code-block:: javascript
 
-        if (extensions[0] === '') {
-          extensions.shift();
-        }
+      if (extensions[0] === '') {
+        extensions.shift();
+      }
 
 Start with the longest possible extension and work towards the shortest.
 
 .. code-block:: javascript
 
-        while (extensions.shift()) {
-          const current = '.' + extensions.join('.');
+      while (extensions.shift()) {
+        const current = `.${ extensions.join('.') }`;
 
-          if (Module._extensions[current]) {
-            return current;
-          }
+        if (Module._extensions[current]) {
+          return current;
         }
+      }
 
 Default to the '.js' file handler if nothing more specific is registered.
 
 .. code-block:: javascript
 
-        return '.js';
-      }
+      return '.js';
+    }
 
 Now we have ``findExtension``, finish by patching the module load itself.
 This involves adding the file directory path to the Node module paths list
@@ -122,10 +119,11 @@ identical save for the ``findExtension`` amendment.
 
 .. code-block:: javascript
 
-      const assert = require('assert').ok;
-      const debug = Module._debug;
+    const assert = require('assert').ok;
+    const debug = Module._debug;
 
-      Module.prototype.load = function(filename) {
+    if (require.extensions) {
+      Module.prototype.load = function load(filename) {
         debug('load %j for module %j', filename, this.id);
 
         assert(!this.loaded);
