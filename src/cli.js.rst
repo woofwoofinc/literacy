@@ -65,6 +65,15 @@ specified with the ``--copy-files`` flag.
       .boolean('copy-files')
       .alias('D', 'copy-files')
 
+Include a ``--quiet`` option to suppress the console messages when files are
+written.
+
+.. code-block:: javascript
+
+      .describe('quiet', 'Suppress messages')
+      .boolean('quiet')
+      .alias('q', 'quiet')
+
 Add help and version option handling.
 
 .. code-block:: javascript
@@ -280,7 +289,9 @@ generated JavaScript is written.
           return console.log(err);
         }
 
-        console.log(`Output written to ${argv.outFile}.`);
+        if (!argv['quiet']) {
+          console.log(`Output written to ${argv.outFile}.`);
+        }
       } else {
         console.log(output);
       }
@@ -337,7 +348,9 @@ The final output filename is generated joining to ``--out-dir`` and trimming the
             fs.copySync(inputFile, outputFile);
           }
 
-          console.log(`Output written to ${outputFile}.`);
+          if (!argv['quiet']) {
+            console.log(`Output written to ${outputFile}.`);
+          }
         }
       } catch (err) {
         return console.log(err);

@@ -72,6 +72,7 @@ For other command options and usage, use `--help`.
       -o, --out-file    Compile to a single output file                     [string]
       -d, --out-dir     Compile to an output directory                      [string]
       -D, --copy-files  Copy non-js.rst files to output directory          [boolean]
+      -q, --quiet       Suppress messages                                  [boolean]
       -h, --help        Show help                                          [boolean]
       -v, --version     Show version number                                [boolean]
 
