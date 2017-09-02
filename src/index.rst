@@ -13,6 +13,17 @@ Development
    releasing
 
 
+Source Code
+-----------
+.. toctree::
+   :maxdepth: 1
+
+   js/index.js
+   js/cli.js
+   js/register.js
+   js/literacy-loader.js
+
+
 Other Topics
 ------------
 .. toctree::

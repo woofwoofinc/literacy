@@ -12,7 +12,7 @@
     "literacy": "./bin/literacy.js"
   },
   "scripts": {
-    "build": "literacy src --out-dir lib"
+    "build": "literacy src/js --out-dir lib"
   },
   "dependencies": {
     "detab": "^2.0.1",
