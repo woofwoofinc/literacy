@@ -1,7 +1,7 @@
 {
   "name": "literacy",
   "description": "Literate programming in JavaScript using reStructuredText.",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "license": "(Apache-2.0 OR MIT)",
   "homepage": "https://github.com/woofwoofinc/literacy",
   "repository": {
@@ -26,7 +26,7 @@
   "devDependencies": {
     "eslint": "^4.6.0",
     "eslint-config-strict": "^14.0.0",
-    "literacy": "^0.2.2"
+    "literacy": "^0.2.4"
   },
   "eslintConfig": {
     "extends": "strict",
@@ -35,7 +35,7 @@
       "node": true
     },
     "rules": {
-      "arrow-parens": ["error", "as-needed"],
+      "arrow-parens": "off",
       "id-blacklist": "off",
       "id-length": "off",
       "indent": "off",
