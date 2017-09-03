@@ -149,7 +149,7 @@ the case where ``--copy-files`` has been provided but not ``--out-dir``.
 
 .. code-block:: javascript
 
-    if (argv['copy-files'] && !outDirFlagPresent) {
+    if (argv.copyFiles && !outDirFlagPresent) {
       errors.push('--copy-files requires --out-dir.');
     }
 
@@ -261,15 +261,22 @@ Can specify a directory containing files also.
 
 All of these cases can be handled together by first expanding the input paths
 using recursive directory enumeration. Only ``.js.rst`` files are included in
-the output.
+the output. The skipped files are logged when output is not to stdout.
 
 .. code-block:: javascript
 
     if (!outDirFlagPresent) {
-      const filenames = enumerateAll(inputs);
-      const filtered = filenames.filter(hasJsRstExtension);
+      const filenames = [];
 
-      const outputs = filtered.map(filename =>
+      enumerateAll(inputs).forEach(filename => {
+        if (hasJsRstExtension(filename)) {
+          filenames.push(filename);
+        } else if (!argv.quiet && outFileFlagPresent) {
+          console.log(`Skipped ${ filename }.`);
+        }
+      });
+
+      const outputs = filenames.map(filename =>
         literacy.fromFile(filename)
       );
 
@@ -357,6 +364,8 @@ The final output filename is generated joining to ``--out-dir`` and trimming the
           if (!argv.quiet) {
             console.log(`Output written to ${ outputFile }.`);
           }
+        } else if (!argv.quiet) {
+          console.log(`Skipped ${ inputFile }.`);
         }
       } catch (error) {
         console.log(error);
