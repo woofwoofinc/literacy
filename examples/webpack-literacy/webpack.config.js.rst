@@ -11,8 +11,6 @@ Webpack uses `node-interpret`_ for file extension handling when reading
 
 .. code-block:: javascript
 
-    'use strict';
-
     const path = require('path');
 
     module.exports = {
@@ -42,7 +40,8 @@ Include a rule in ``modules.exports.modules`` for handing ``.js.rst`` files.
           {
             test: /\.js\.rst/,
             use: [
-              'literacy-loader'
+              'eslint-loader',
+              'literacy-loader',
             ]
           }
         ]

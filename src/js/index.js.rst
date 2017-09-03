@@ -2,10 +2,6 @@ Literacy
 ========
 Literate programming in JavaScript using reStructuredText.
 
-.. code-block:: javascript
-
-    'use strict';
-
 
 Parser
 ------
@@ -226,7 +222,7 @@ Otherwise, the line is regular text with optional indentation.
           text: indent.join('') + characters.join('')
         }
       }
-      `
+      `,
     ];
 
     const parser = peg.generate(rules.join(''));
@@ -242,7 +238,7 @@ JavaScript blocks concatenated together.
 
     const detab = require('detab');
 
-    module.exports.fromString = function(content) {
+    module.exports.fromString = function fromString(content) {
 
 Prep the content by detabing it to a tab stop of eight per the reStructuredText
 specification. This also means that the grammar rules can assume there is no
@@ -271,11 +267,11 @@ Start with some tracking state and scan the line classification blocks.
 
 .. code-block:: javascript
 
-      let output = [];
+      const output = [];
       let indent = 0;
       let inJavaScript = false;
 
-      parsed.forEach(function(line) {
+      parsed.forEach(line => {
 
 Do the directive end condition first. We need to be already in a JavaScript
 block and the current line must have an indentation level less than or equal to
@@ -315,7 +311,14 @@ generated JavaScript.
         }
       });
 
-      return output.join('\n');
+And ensure the output ends on a newline.
+
+.. code-block:: javascript
+
+      let result = output.join('\n');
+      result += '\n';
+
+      return result;
     };
 
 Include a wrapper for processing ``.js.rst`` from a file directly.
@@ -324,7 +327,7 @@ Include a wrapper for processing ``.js.rst`` from a file directly.
 
     const fs = require('fs');
 
-    module.exports.fromFile = function(filename) {
+    module.exports.fromFile = function fromFile(filename) {
       const content = fs.readFileSync(filename).toString();
       return exports.fromString(content);
     };

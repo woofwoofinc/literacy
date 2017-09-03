@@ -10,6 +10,20 @@
     "webpack": "^3.5.5"
   },
   "dependencies": {
-    "literacy": "^0.2.2"
+    "eslint": "^4.6.0",
+    "eslint-config-strict": "^14.0.0",
+    "eslint-loader": "^1.9.0",
+    "literacy": "^0.2.4"
+  },
+  "eslintConfig": {
+    "extends": "strict",
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "rules": {
+      "no-console": "off",
+      "indent": "off"
+    }
   }
 }

@@ -2,8 +2,6 @@
 // Wrapper Webpack configuration file to load from .js.rst instead.
 //
 
-'use strict';
-
 // Load Literacy support for `.js.rst` files in Node.
 require('literacy/lib/register');
 

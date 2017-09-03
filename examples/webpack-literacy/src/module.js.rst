@@ -6,6 +6,4 @@ Example of using ``require`` within a ``.js.rst`` file to reference another
 
 .. code-block:: javascript
 
-    'use strict';
-
     console.log('Hello again, Doggies!');

@@ -5,8 +5,6 @@ the Literacy loader.
 
 .. code-block:: javascript
 
-    'use strict';
-
     console.log('Hello, Doggies!');
 
 To test require references to ``.js.rst`` files, we include another ``.js.rst``
