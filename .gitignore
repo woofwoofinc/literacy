@@ -4,6 +4,6 @@
 
 # Build artifacts
 dist
-docs/_build
+src/_build
 node_modules
 lib

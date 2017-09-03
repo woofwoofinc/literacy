@@ -83,15 +83,15 @@ options to arrange deletion of everything except the .git directory.
     shopt -u extglob
     shopt -u dotglob
 
-Next, copy in the contents of ``docs/_build/html`` from the main project
+Next, copy in the contents of ``src/_build/html`` from the main project
 repository. This is the latest build of the documentation. Dot globing is
-used again since the dot files in the ``docs/_build/html`` directory are also
+used again since the dot files in the ``src/_build/html`` directory are also
 needed.
 
 ::
 
     shopt -s dotglob
-    cp -r ../literacy/docs/_build/html/* .
+    cp -r ../literacy/src/_build/html/* .
 
     shopt -u dotglob
 

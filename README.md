@@ -1,4 +1,4 @@
-# ![Literary](https://raw.githubusercontent.com/woofwoofinc/literacy/master/docs/assets/title.png)
+# ![Literary](https://raw.githubusercontent.com/woofwoofinc/literacy/master/src/assets/title.png)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](https://github.com/woofwoofinc/literacy#license)
 [![NPM](https://img.shields.io/npm/v/literacy.svg)](https://www.npmjs.com/package/literacy)
@@ -7,10 +7,10 @@ Literate programming in JavaScript using [reStructuredText].
 
 [reStructuredText]: http://docutils.sourceforge.net/rst.html
 
-Detailed documentation is provided in the [docs] directories and at
+Detailed documentation is provided in the [src] directories and at
 [woofwoofinc.github.io/literacy].
 
-[docs]: docs
+[src]: src
 [woofwoofinc.github.io/literacy]: https://woofwoofinc.github.io/literacy
 
 
@@ -213,7 +213,7 @@ By participating in this project you agree to abide by its terms. Instances of
 abusive, harassing, or otherwise unacceptable behavior may be reported by
 contacting the project team at woofwoofinc@gmail.com.
 
-[Contributor Code of Conduct]: docs/conduct.rst
+[Contributor Code of Conduct]: src/conduct.rst
 
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be

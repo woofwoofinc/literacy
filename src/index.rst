@@ -3,6 +3,17 @@
 Literate programming in JavaScript using reStructuredText.
 
 
+Source Code
+-----------
+.. toctree::
+   :maxdepth: 1
+
+   js/index.js
+   js/cli.js
+   js/register.js
+   js/literacy-loader.js
+
+
 Development
 -----------
 .. toctree::
