@@ -31,4 +31,5 @@ Other Topics
 
    contributing
    conduct
+   thanks
    license
