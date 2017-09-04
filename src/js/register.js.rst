@@ -1,8 +1,8 @@
-Register ``.js.rst``` File Extension
-------------------------------------
-Intercept Node module loading for filenames ending in ``.js.rst``.  This
-allows ``.js.rst`` files to be passed to ``require`` calls without including
-the suffix.
+Register ``.js.rst`` File Extension
+-----------------------------------
+Intercept Node module loading for filenames ending in ``.js.rst``. This allows
+``.js.rst`` files to be passed to ``require`` calls without including the
+suffix.
 
 Implementation is copied from `register.coffee`_ in CoffeeScript and is similar
 to `babel-register`_.
