@@ -380,7 +380,7 @@ output path from the base input directory path.
           const filenames = enumerate(input);
 
           filenames.forEach(filename =>
-            processFile(filename, path.relative(path.dirname(filename), filename))
+            processFile(filename, path.relative(input, filename))
           );
 
 Otherwise the path is a file and can be processed directly with its basename as
