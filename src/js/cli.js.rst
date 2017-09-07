@@ -277,7 +277,7 @@ the output. The skipped files are logged when output is not to stdout.
       });
 
       const outputs = filenames.map(filename =>
-        literacy.fromFile(filename)
+        literacy.fromFile(filename).content
       );
 
       let output = outputs.join('\n');
@@ -353,10 +353,15 @@ The final output filename is generated joining to ``--out-dir`` and trimming the
           fs.ensureFileSync(outputFile);
 
           if (hasJsRstExtension(inputFile)) {
-            let output = literacy.fromFile(inputFile);
-            output += '\n';
+            const output = literacy.fromFile(inputFile);
+            output.content += '\n';
 
-            fs.writeFileSync(outputFile, output);
+            fs.writeFileSync(outputFile, output.content);
+            fs.writeFileSync(`${ outputFile }.map`, output.sourcemap);
+
+            if (!argv.quiet) {
+              console.log(`Source map generated for ${ outputFile }.`);
+            }
           } else if (argv.copyFiles) {
             fs.copySync(inputFile, outputFile);
           }

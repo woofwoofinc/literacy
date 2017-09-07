@@ -54,7 +54,7 @@ extension.
 
 .. code-block:: javascript
 
-      entry: './src/index',
+      entry: './src/main',
 
 The rest of the Webpack configuration is unchanged. Here we indicate that the
 bundled files should be output to ``./dist/bundle.js``. After running
@@ -66,5 +66,20 @@ input content is present.
       output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
-      }
+      },
+
+Run a development server with recompilation on page refresh.
+
+.. code-block:: javascript
+
+      devServer: {
+        contentBase: path.resolve(__dirname, './src')
+      },
+
+Generate source maps to show original ``.rst.js`` files in browser debugger
+tools.
+
+.. code-block:: javascript
+
+      devtool: 'source-map'
     };

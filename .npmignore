@@ -2,5 +2,6 @@ dev
 examples
 node_modules
 src
+lib/*.map
 *.iml
 .editorconfig

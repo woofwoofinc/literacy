@@ -37,7 +37,7 @@ into the running environment.
     const literacy = require('./index.js');
 
     function loadFile(module, filename) {
-      const javaScript = literacy.fromFile(filename);
+      const javaScript = literacy.fromFile(filename).content;
       module._compile(javaScript, filename);
     }
 

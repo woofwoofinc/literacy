@@ -44,6 +44,7 @@ This container is intended for interactive use, so to run it with rkt use:
 
     sudo rkt run \
         --interactive \
+        --port 8080-tcp:8080 \
         --volume literacy,kind=host,source=$(pwd) \
         dev-literacy \
         --mount volume=literacy,target=/literacy

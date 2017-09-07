@@ -96,6 +96,7 @@ result object of the rule.
         return {
           type: 'blank',
           text: '',
+          lineNumber: location().start.line,
         }
       }
 
@@ -219,13 +220,86 @@ Otherwise, the line is regular text with optional indentation.
         return {
           type: 'text',
           indent: indent.length,
-          text: indent.join('') + characters.join('')
+          text: indent.join('') + characters.join(''),
+          lineNumber: location().start.line,
         }
       }
       `,
     ];
 
     const parser = peg.generate(rules.join(''));
+
+
+Source Maps
+-----------
+Calculate `source maps`_ for Literacy output. The ``.js.rst`` file format is
+impractical without access to debugger tools or stacktrace line number
+translation.
+
+.. _source map: https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/
+
+Uses the `Mozilla source map module`_ to generate line based source maps.
+Accurate correspondence is sufficiently granular at line-level. Calculating line
+and column correspondence is unwieldy since the input file is detabbed for
+convenience in parsing.
+
+.. _Mozilla source map module: https://github.com/mozilla/source-map
+
+.. code-block:: javascript
+
+    const sourcemap = require('source-map');
+
+    function generateSourceMap(inputFilename, input, output, inputLineNumbers) {
+      const sourceMapGenerator = new sourcemap.SourceMapGenerator({
+        file: inputFilename,
+      });
+
+      sourceMapGenerator.setSourceContent(inputFilename, input);
+
+For each output line, add an entry in the source map generator with the
+corresponding input line collected in ``inputLineNumbers``.
+
+Drop the last entry in the output line array since the array was padded to
+include a separate newline. The padded line does not have a corresponding input
+file line number.
+
+.. code-block:: javascript
+
+      output.slice(0, -1).forEach((outputLine, outputLineNumber) => {
+
+The ``inputLineNumbers`` array is zero-indexed.
+
+.. code-block:: javascript
+
+        const inputLineNumber = inputLineNumbers[outputLineNumber];
+
+        sourceMapGenerator.addMapping({
+          source: inputFilename,
+          original: {
+
+PEG.js line numbers are one-indexed like source map line numbers are required to
+be.
+
+.. code-block:: javascript
+
+            line: inputLineNumber,
+            column: 0,
+          },
+          generated: {
+
+But we need to adjust the zero-indexed array indices or the first line number,
+i.e. 0, is invalid and breaks the source map generation.
+
+.. code-block:: javascript
+
+            line: outputLineNumber + 1,
+            column: 0,
+          },
+        });
+      });
+
+      return sourceMapGenerator.toString();
+    }
 
 
 Exports
@@ -238,17 +312,17 @@ JavaScript blocks concatenated together.
 
     const detab = require('detab');
 
-    module.exports.fromString = function fromString(content) {
+    module.exports.fromString = function fromString(input, inputFilename) {
 
-Prep the content by detabing it to a tab stop of eight per the reStructuredText
+Prep the input by detabing it to a tab stop of eight per the reStructuredText
 specification. This also means that the grammar rules can assume there is no
 tab whitespacing.
 
 .. code-block:: javascript
 
-      const detabbed = detab(content, 8);
+      const detabbed = detab(input, 8);
 
-Then parse the content.
+Then parse the input content.
 
 .. code-block:: javascript
 
@@ -268,6 +342,7 @@ Start with some tracking state and scan the line classification blocks.
 .. code-block:: javascript
 
       const output = [];
+      const inputLineNumbers = [];
       let indent = 0;
       let inJavaScript = false;
 
@@ -304,19 +379,41 @@ that into the output. Note that the directive lines themselves are not given a
 Blank lines have text consisting of an empty line so they are included in the
 generated JavaScript.
 
+Record the input file line number for each output line so we can create a source
+map later if needed.
+
 .. code-block:: javascript
 
         if (inJavaScript && typeof line.text !== 'undefined') {
           output.push(line.text);
+          inputLineNumbers.push(line.lineNumber);
         }
       });
 
-And ensure the output ends on a newline.
+Create the output, ensuring it ends on a newline.
 
 .. code-block:: javascript
 
-      let result = output.join('\n');
-      result += '\n';
+      output.push('\n');
+      const result = {
+        content: output.join('\n'),
+      };
+
+If the input filename was provided then generate a source map. Without an input
+filename we cannot generate a valid source map. The source map created is line
+based, linking line numbers in the output to corresponding JavaScript block line
+numbers in the input.
+
+.. code-block:: javascript
+
+      if (typeof inputFilename !== 'undefined') {
+        result.sourcemap = generateSourceMap(
+          inputFilename,
+          input,
+          output,
+          inputLineNumbers
+        );
+      }
 
       return result;
     };
@@ -329,5 +426,5 @@ Include a wrapper for processing ``.js.rst`` from a file directly.
 
     module.exports.fromFile = function fromFile(filename) {
       const content = fs.readFileSync(filename).toString();
-      return exports.fromString(content);
+      return exports.fromString(content, filename);
     };
