@@ -63,6 +63,14 @@ specified with the ``--copy-files`` flag.
       .boolean('copy-files')
       .alias('D', 'copy-files')
 
+Option to generate source maps for output JavaScript files.
+
+.. code-block:: javascript
+
+      .describe('source-maps', 'Generate source maps for output files')
+      .boolean('source-maps')
+      .alias('s', 'source-maps')
+
 Include a ``--quiet`` option to suppress the console messages when files are
 written.
 
@@ -89,40 +97,13 @@ inputs to produce an object with the flag settings and values.
 
       .argv;
 
-
-Input Path Wildcard Expansion
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Paths may be specified using glob_ wildcard syntax. Expand the provided inputs
-to an array of non-wildcard paths.
-
-.. _glob: https://github.com/isaacs/node-glob
+Expand the input paths using glob expansion. This converts wildcard patterns to
+path locations.
 
 .. code-block:: javascript
 
-    const glob = require('glob');
-
-    let inputs = [];
-
-    argv._.forEach(input => {
-      const expanded = glob.sync(input);
-
-      if (expanded.length === 0) {
-        // The input path does not expand, include it unchanged.
-        inputs.push(input);
-      } else {
-        // Otherwise just include the expansions.
-        inputs.push(...expanded);
-      }
-    });
-
-Take only the unique results since the wildcard patterns may match an
-individual path multiple times.
-
-.. code-block:: javascript
-
-    const uniq = require('lodash/uniq');
-
-    inputs = uniq(inputs);
+    const utils = require('./utils');
+    const inputs = utils.expand(argv._);
 
 
 Validation
@@ -141,6 +122,14 @@ use manual validation for the conflict case where ``--out-file`` and
 
     if (outFileFlagPresent && outDirFlagPresent) {
       errors.push('Cannot have --out-file and --out-dir.');
+    }
+
+One of ``--out-file`` or ``--out-dir`` is required.
+
+.. code-block:: javascript
+
+    if (!outFileFlagPresent && !outDirFlagPresent) {
+      errors.push('Must have either --out-file or --out-dir.');
     }
 
 Similarly, Yargs can detect when a flag is present without another flag which it
@@ -165,8 +154,26 @@ Verify the input paths exist.
       }
     });
 
-None of these errors are recoverable so we error out. We only need to specify a
-single error cause for this.
+Disallow multiple input files for the output file option. The Literacy
+command line tool focuses on a single task, transpilation of ``.js.rst`` to
+``.js``. For concatenation or minification, etc, use a follow-up build step.
+
+The input must also be a ``.js.rst`` file, not a directory.
+
+.. code-block:: javascript
+
+    if (outFileFlagPresent) {
+      if (inputs.length !== 1) {
+        errors.push('Must have exactly one input file for --out-file.');
+      } else if (fs.statSync(inputs[0]).isDirectory()) {
+        errors.push('Input file cannot be a directory for --out-file.');
+      } else if (!inputs[0].endsWith('.js.rst')) {
+        errors.push('Input file must be `.js.rst` for --out-file.');
+      }
+    }
+
+None of these errors are recoverable so error out. Only need to specify a single
+error cause for this.
 
 .. code-block:: javascript
 
@@ -176,151 +183,69 @@ single error cause for this.
     }
 
 
-File Utilities
-~~~~~~~~~~~~~~
-Since input paths may be directories, it is necessary to be able to enumerate
-the contents of directories recursively.
-
-.. code-block:: javascript
-
-    const dir = require('node-dir');
-
-    function enumerate(filename) {
-      let expanded = [ filename ];
-      if (fs.statSync(filename).isDirectory()) {
-        expanded = dir.files(filename, { sync: true });
-      }
-
-      return expanded;
-    }
-
-A version of this which takes a list of input filenames is needed for the
-multiple input cases.  Since there may be nesting of input paths, it is
-necessary to calculate a full list of files first and only output the unique
-entries.
-
-.. code-block:: javascript
-
-    function enumerateAll(filenames) {
-      const enumerated = [];
-
-      filenames.forEach(filename => {
-        const expanded = enumerate(filename);
-        enumerated.push(...expanded);
-      });
-
-      return uniq(enumerated);
-    }
-
-It is also convenient to test if a file has a ``.js.rst`` suffix.
-
-.. code-block:: javascript
-
-    function hasJsRstExtension(filename) {
-      return filename.endsWith('.js.rst');
-    }
-
-
-Compile File(s)
-~~~~~~~~~~~~~~~
-Compile a single file ``examples/blocks.js.rst`` and output to stdout.
-
-.. code-block:: bash
-
-    literacy examples/blocks.js.rst
-
-Compile multiple files and output to stdout.
-
-.. code-block:: bash
-
-    literacy examples/basic.js.rst examples/blocks.js.rst
-
-Can specify a directory containing files also.
-
-.. code-block:: bash
-
-    literacy examples
-
-To output to a file, use ``--out-file`` or ``-o``.
+Compile Single File
+~~~~~~~~~~~~~~~~~~~
+Compile a single file ``examples/blocks.js.rst`` and output to a file. Uses
+``--out-file`` or ``-o`` for the output filename.
 
 .. code-block:: bash
 
     literacy examples/blocks.js.rst --out-file blocks.js
 
-Compile multiple files into output.
-
-.. code-block:: bash
-
-    literacy examples/basic.js.rst examples/blocks.js.rst --out-file examples.js
-
-Can specify a directory containing files also.
-
-.. code-block:: bash
-
-    literacy examples --out-file examples.js
-
-All of these cases can be handled together by first expanding the input paths
-using recursive directory enumeration. Only ``.js.rst`` files are included in
-the output. The skipped files are logged when output is not to stdout.
+Process the input file using the Literacy module and perform the output.
 
 .. code-block:: javascript
 
-    if (!outDirFlagPresent) {
-      const filenames = [];
+    function transpileJsRstFile(inputFile, outputFile) {
+      try {
+        const output = literacy.fromFile(inputFile);
 
-      enumerateAll(inputs).forEach(filename => {
-        if (hasJsRstExtension(filename)) {
-          filenames.push(filename);
-        } else if (!argv.quiet && outFileFlagPresent) {
-          console.log(`Skipped ${ filename }.`);
+        fs.ensureFileSync(outputFile);
+        fs.writeFileSync(outputFile, output.content);
+        if (!argv.quiet) {
+          console.log(`Output written to ${ outputFile }.`);
         }
-      });
 
-      const outputs = filenames.map(filename =>
-        literacy.fromFile(filename).content
-      );
-
-      let output = outputs.join('\n');
-
-Ensure output ends with a newline.
-
-.. code-block:: javascript
-
-      output += '\n';
-
-The single combined output file and stdout output cases differ only in where the
-generated JavaScript is written.
-
-.. code-block:: javascript
-
-      if (outFileFlagPresent) {
-        try {
-          fs.writeFileSync(argv.outFile, output);
-
-          if (!argv.quiet) {
-            console.log(`Output written to ${ argv.outFile }.`);
-          }
-        } catch (error) {
-          console.log(error);
+        if (argv.sourceMaps) {
+          fs.writeFileSync(`${ outputFile }.map`, output.sourceMap);
+          console.log(`Source map written to ${ outputFile }.map.`);
         }
-      } else {
-        console.log(output);
+      } catch (error) {
+        console.log(error);
       }
     }
 
+    if (outFileFlagPresent) {
+      transpileJsRstFile(inputs[0], argv.outFile);
+    }
 
-Compile to Output Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Compile Directory
+~~~~~~~~~~~~~~~~~
 Compile the ``.js.rst`` files from a source directory and output to another
 directory. This doesn’t overwrite any other files or directories in the output.
+
+Use ``--out-file`` or ``-o`` for the output directory name.
 
 .. code-block:: bash
 
     literacy --out-dir lib src
 
+Compile multiple directories into the output.
+
+.. code-block:: bash
+
+    literacy --out-dir lib examples src
+
+Can specify a combination of files, directories, and wildcards.
+
+.. code-block:: bash
+
+    literacy --out-dir lib examples/basic.js.rst src examples/webpack-literacy/**.js.rst
+
 Processing of the output directory case has to take a different approach from
-that above since it is necessary to take account of filenames relative to the
-input paths.
+single file output since it is necessary to take account of filenames relative
+to the input paths.
 
 - If an individual file is specified as an input path, then it is processed and
   any output written to a file of the same name but at the root of the output
@@ -330,41 +255,37 @@ input paths.
   and any output written to a file under the output directory retaining any
   intermediate directories.
 
-Start by defining the processing operation on an individual file. Once we know
-the input filename and the relative destination path, then we just need to use
-Literacy to convert the file if it is ``.js.rst``. If not, we copy the file to
-the target location if ``--copy-files`` was specified.
-
-The final output filename is generated joining to ``--out-dir`` and trimming the
-``.rst`` from ``.js.rst``.
+Start by defining how an individual file is handled. This includes the cases of
+``.js.rst`` files, other files when ``--copy-files`` is specified, and skipped
+files.
 
 .. code-block:: javascript
 
     const path = require('path');
 
-    function processFile(inputFile, relativeOutputFile) {
+    function transpileFile(inputFile, relativeOutputFile) {
       try {
-        if (hasJsRstExtension(inputFile) || argv.copyFiles) {
-          let outputFile = path.join(argv.outDir, relativeOutputFile);
-          if (hasJsRstExtension(inputFile)) {
-            outputFile = outputFile.slice(0, -4);
-          }
 
+For ``.js.rst`` files, calculate the correct output filename by joining the
+relative output filename to ``--out-dir`` and trimming ``.rst`` from the
+``.js.rst`` suffix. Then use the single file compilation code path.
+
+.. code-block:: javascript
+
+        let outputFile = path.join(argv.outDir, relativeOutputFile);
+
+        if (inputFile.endsWith('.js.rst')) {
+          outputFile = outputFile.slice(0, -4);
+          transpileJsRstFile(inputFile, outputFile);
+
+Copy non-``.js.rst`` files to the target location if ``--copy-files`` was
+specified, otherwise skip.
+
+.. code-block:: javascript
+
+        } else if (argv.copyFiles) {
           fs.ensureFileSync(outputFile);
-
-          if (hasJsRstExtension(inputFile)) {
-            const output = literacy.fromFile(inputFile);
-            output.content += '\n';
-
-            fs.writeFileSync(outputFile, output.content);
-            fs.writeFileSync(`${ outputFile }.map`, output.sourceMap);
-
-            if (!argv.quiet) {
-              console.log(`Source map generated for ${ outputFile }.`);
-            }
-          } else if (argv.copyFiles) {
-            fs.copySync(inputFile, outputFile);
-          }
+          fs.copySync(inputFile, outputFile);
 
           if (!argv.quiet) {
             console.log(`Output written to ${ outputFile }.`);
@@ -377,7 +298,7 @@ The final output filename is generated joining to ``--out-dir`` and trimming the
       }
     }
 
-Process each input path in turn.
+Handle each input path in turn.
 
 .. code-block:: javascript
 
@@ -391,7 +312,7 @@ output path from the base input directory path.
 .. code-block:: javascript
 
         if (fs.statSync(input).isDirectory()) {
-          const filenames = enumerate(input);
+          const filenames = utils.recursivelyEnumerate(input);
 
           filenames.forEach(filename =>
             processFile(filename, path.relative(input, filename))
@@ -403,8 +324,7 @@ the relative output path.
 .. code-block:: javascript
 
         } else {
-          processFile(input, path.basename(input));
+          transpileFile(input, path.basename(input));
         }
       });
     }
-

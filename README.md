@@ -66,12 +66,13 @@ For other command options and usage, use `--help`.
     Literate programming in JavaScript using reStructuredText. This command extracts
     code blocks from `.js.rst` reStructuredText files.
     
-    Usage: bin/literacy.js [options] <paths>
+    Usage: literacy [options] <paths>
     
     Options:
       -o, --out-file    Compile to a single output file                     [string]
       -d, --out-dir     Compile to an output directory                      [string]
       -D, --copy-files  Copy non-js.rst files to output directory          [boolean]
+      -s, --source-maps Generate source maps for output files              [boolean]
       -q, --quiet       Suppress messages                                  [boolean]
       -h, --help        Show help                                          [boolean]
       -v, --version     Show version number                                [boolean]

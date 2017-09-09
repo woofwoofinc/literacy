@@ -13,6 +13,7 @@ Source Code
    js/cli.js
    js/register.js
    js/literacy-loader.js
+   js/utils.js
 
 
 Development
