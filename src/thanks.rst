@@ -3,6 +3,7 @@ Thanks
 Thank you to the project contributors including:
 
 - `Daithi O Crualaoich <https://github.com/daithiocrualaoich>`_
+- `Pascal Hartig <https://github.com/passy>`_
 
 Literacy is a combination of `Literate CoffeeScript`_, Webpack_, and Babel_.
 
