@@ -1,7 +1,7 @@
 {
   "name": "literacy",
   "description": "Literate programming in JavaScript using reStructuredText.",
-  "version": "0.3.0",
+  "version": "0.2.5",
   "license": "(Apache-2.0 OR MIT)",
   "homepage": "https://github.com/woofwoofinc/literacy",
   "repository": {

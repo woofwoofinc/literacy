@@ -236,7 +236,7 @@ Calculate `source maps`_ for Literacy output. The ``.js.rst`` file format is
 impractical without access to debugger tools or stacktrace line number
 translation.
 
-.. _source map: https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/
+.. _source maps: https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/
 
 Uses the `Mozilla source map module`_ to generate line based source maps.
 Accurate correspondence is sufficiently granular at line-level. Calculating line
