@@ -23,10 +23,21 @@ Literacy module operation.
 
 .. code-block:: javascript
 
+    const path = require('path');
+
     module.exports = function exports(content) {
         if (this.cacheable) {
           this.cacheable();
         }
 
-        return literacy.fromString(content);
+Determine the Webpack input filename from the context and resource path so that
+it can be passed to the Literacy generator. An input filename is needed in order
+to create source maps.
+
+.. code-block:: javascript
+
+        const inputFilename = path.relative(this.context, this.resourcePath);
+        const output = literacy.fromFileContents(inputFilename, content);
+
+        this.callback(null, output.content, output.sourceMap);
     };

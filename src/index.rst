@@ -9,6 +9,7 @@ Source Code
    :maxdepth: 1
 
    js/index.js
+   js/parser.js
    js/cli.js
    js/register.js
    js/literacy-loader.js
