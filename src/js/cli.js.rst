@@ -357,7 +357,7 @@ The final output filename is generated joining to ``--out-dir`` and trimming the
             output.content += '\n';
 
             fs.writeFileSync(outputFile, output.content);
-            fs.writeFileSync(`${ outputFile }.map`, output.sourcemap);
+            fs.writeFileSync(`${ outputFile }.map`, output.sourceMap);
 
             if (!argv.quiet) {
               console.log(`Source map generated for ${ outputFile }.`);

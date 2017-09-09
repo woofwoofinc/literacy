@@ -37,7 +37,7 @@ to create source maps.
 .. code-block:: javascript
 
         const inputFilename = path.relative(this.context, this.resourcePath);
-        const output = literacy.fromString(content, inputFilename);
+        const output = literacy.fromFileContents(inputFilename, content);
 
-        this.callback(null, output.content, output.sourcemap);
+        this.callback(null, output.content, output.sourceMap);
     };
