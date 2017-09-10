@@ -61,7 +61,7 @@ acbuild run -- pip install -q sphinx_bootstrap_theme
 # Node
 ################################################################################
 
-NODE_VERSION=6.11.2
+NODE_VERSION=6.11.3
 
 acbuild run -- wget -q https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz
 acbuild run -- tar xJf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/ --strip-components=1
@@ -72,7 +72,7 @@ acbuild run -- rm node-v${NODE_VERSION}-linux-x64.tar.xz
 # Yarn
 ################################################################################
 
-YARN_VERSION=0.27.5
+YARN_VERSION=1.0.1
 
 acbuild run -- wget -q https://github.com/yarnpkg/yarn/releases/download/v${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz
 acbuild run -- tar xzf yarn-v${YARN_VERSION}.tar.gz -C /usr/ --strip-components=1
