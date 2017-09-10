@@ -35,15 +35,7 @@ Or with [Yarn]:
 Usage
 -----
 Use the `literacy` command to extract the code blocks from a single `.js.rst`
-file and output them to stdout.
-
-    $ literacy examples/blocks.js.rst
-
-Multiple file paths and even directories can be specified in the command line.
-
-    $ literacy examples/blocks.js.rst examples/basic.js.rst src
-
-To output to a file, use `--out-file`.
+file and output to a file.
 
     $ literacy examples/blocks.js.rst --out-file blocks.js
 
@@ -66,15 +58,23 @@ For other command options and usage, use `--help`.
     Literate programming in JavaScript using reStructuredText. This command extracts
     code blocks from `.js.rst` reStructuredText files.
     
-    Usage: bin/literacy.js [options] <paths>
+    Usage: literacy [options] <paths>
     
     Options:
       -o, --out-file    Compile to a single output file                     [string]
       -d, --out-dir     Compile to an output directory                      [string]
       -D, --copy-files  Copy non-js.rst files to output directory          [boolean]
+      -s, --source-maps Generate source maps for output files              [boolean]
       -q, --quiet       Suppress messages                                  [boolean]
       -h, --help        Show help                                          [boolean]
       -v, --version     Show version number                                [boolean]
+
+Projects which incorporate Literacy can combine documentation and source trees
+into a single reStructured Text document. See [src] in this project for an
+example. There, the `index.rst` file is the entry point for the documentation
+and includes the source `.js.rst` files from `src/js` into the document. These
+source files are also separately processed by the Literacy command line tool to
+make the `lib` module directory contents for publishing to the NPM registry.
 
 
 Require Hook
