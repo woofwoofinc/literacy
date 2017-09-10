@@ -33,7 +33,7 @@ Then publish.
 ::
 
     $ npm publish
-    + literacy@0.1.2
+    + literacy@1.0.0
 
 The latest version of the Literacy package can be verified in the npm registry
 at `literacy`_.
@@ -80,12 +80,12 @@ Then publish.
 ::
 
     $ npm publish
-    + literacy-loader@0.2.5
+    + literacy-loader@1.0.0
 
 The latest version of the Literacy package can be verified in the npm registry
 at `literacy-loader`_.
 
-.. _literacy: https://www.npmjs.com/package/literacy-loader
+.. _literacy-loader: https://www.npmjs.com/package/literacy-loader
 
 
 Publishing the Documentation
