@@ -41,6 +41,53 @@ at `literacy`_.
 .. _literacy: https://www.npmjs.com/package/literacy
 
 
+Publishing Webpack Loader to NPM
+--------------------------------
+This follows the same pattern as publishing the Literacy module except working
+from the `loader` directory.
+
+::
+
+    cd loader
+
+Install the project development dependencies to get a bootstrap Literacy command
+if this hasn't been done already.
+
+::
+
+    yarn
+
+Build the ``lib`` directory contents for publication.
+
+::
+
+    rm -fr lib && yarn build
+
+Login to the `npm registry`_.
+
+.. _npm registry: https://www.npmjs.com
+
+::
+
+    $ npm login
+    Username: woofwoofinc
+    Password:
+    Email: (this IS public) woofwoofinc@gmail.com
+    Logged in as woofwoofinc on https://registry.npmjs.org/.
+
+Then publish.
+
+::
+
+    $ npm publish
+    + literacy-loader@0.2.5
+
+The latest version of the Literacy package can be verified in the npm registry
+at `literacy-loader`_.
+
+.. _literacy: https://www.npmjs.com/package/literacy-loader
+
+
 Publishing the Documentation
 ----------------------------
 Project documentation is published to `woofwoofinc.github.io/literacy`_ using

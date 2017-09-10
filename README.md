@@ -98,61 +98,15 @@ extraction before handing it to the Node module compiler.
 
 Webpack Loader
 --------------
-Literacy can be integrated with Webpack to support `.js.rst` processing. See the
-example project included at `example/webpack-literacy`.
+A Webpack loader is provided for integrating Literacy with Webpack to support
+`.js.rst` processing. See the example project included at
+`example/webpack-literacy`.
 
-To incorporate Literacy into an existing Webpack project, first add the Literacy
-dependencies to the Webpack project.
+See the [loader] directories or the [NPM Webpack loader] documentation for
+details.
 
-    npm install --save literacy
-    
-Or with Yarn:
-
-    yarn add literacy
-
-There isn't a separate module in the NPM registry for `literacy-loader`, it's
-included in the main `literacy` module. This means that Webpack needs to know
-where to resolve the loader before it can be used. For this, add the path to the
-`libs` directory in `literacy` to `modules.exports.resolveLoader.modules` in
-`webpack.config.js`.
-
-    // Load Literacy loader support for `.js.rst` files in Webpack.
-    resolveLoader: {
-      modules: ['node_modules', 'node_modules/literacy/lib']
-    }
-
-Webpack does not allow the `require.extension` hook so requiring `.js.rst`
-modules needs the file extension to be provided. Extensionless require can be
-enabled by adding `.js.rst` to the Webpack `modules.exports.resolve.extensions
-list.
-
-    // Enable `.js.rst` requires without suffix.
-    resolve: {
-      extensions: ['.js', '.json', '.js.rst']
-    }  
-
-Include a rule in `modules.exports.modules` for handing `.js.rst` files.
-
-    module: {
-      rules: [
-        {
-          test: /\.js\.rst/,
-          use: [
-            'literacy-loader'
-          ]
-        }
-      ]
-    }
-
-And we can now use `.js.rst` filenames where `.js` was used previously. For
-example, in the `modules.exports.entry` entrypoint.
-
-    entry: './src/index.js.rst'
-    
-If the `resolve.extensions` has been provided for `.js.rst`, then this line
-will work without the explicit extension.
-
-    entry: './src/index'
+[loader]: loader
+[NPM Webpack loader]: https://www.npmjs.com/package/literacy-loader
 
 
 License

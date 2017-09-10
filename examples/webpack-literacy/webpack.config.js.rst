@@ -15,14 +15,6 @@ Webpack uses `node-interpret`_ for file extension handling when reading
 
     module.exports = {
 
-Load Literacy loader support for ``.js.rst`` files in Webpack.
-
-.. code-block:: javascript
-
-      resolveLoader: {
-        modules: ['node_modules', 'node_modules/literacy/lib']
-      },
-
 Enable ``.js.rst`` requires without suffix.
 
 .. code-block:: javascript

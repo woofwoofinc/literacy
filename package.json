@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/woofwoofinc/literacy.git"
   },
+  "main": "lib/index.js",
   "bin": {
     "literacy": "./bin/literacy.js"
   },
