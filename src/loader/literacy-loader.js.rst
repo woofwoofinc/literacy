@@ -12,7 +12,7 @@ details.
 
 .. code-block:: javascript
 
-    const literacy = require('./index');
+    const literacy = require('literacy');
 
 The Webpack documentation on `writing loaders`_ outlines how to implement a new
 loader. For a case like ``.js.rst`` the implementation only needs a function to

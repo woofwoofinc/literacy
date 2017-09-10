@@ -1,5 +1,6 @@
 dev
 examples
+loader
 node_modules
 src
 *.map

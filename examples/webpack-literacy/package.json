@@ -4,16 +4,14 @@
   "version": "1.0.0",
   "license": "(Apache-2.0 OR MIT)",
   "scripts": {
-    "build": "webpack"
-  },
-  "devDependencies": {
-    "webpack": "^3.5.5"
+    "build": "webpack -p"
   },
   "dependencies": {
     "eslint": "^4.6.0",
     "eslint-config-strict": "^14.0.0",
     "eslint-loader": "^1.9.0",
-    "literacy": "^0.2.4"
+    "literacy-loader": "^0.2.5",
+    "webpack": "^3.5.5"
   },
   "eslintConfig": {
     "extends": "strict",

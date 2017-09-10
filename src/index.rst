@@ -12,8 +12,15 @@ Source Code
    js/parser.js
    js/cli.js
    js/register.js
-   js/literacy-loader.js
    js/utils.js
+
+
+Webpack Loader
+--------------
+.. toctree::
+   :maxdepth: 1
+
+   loader/literacy-loader.js
 
 
 Development
