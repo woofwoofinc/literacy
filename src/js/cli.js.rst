@@ -314,9 +314,9 @@ output path from the base input directory path.
         if (fs.statSync(input).isDirectory()) {
           const filenames = utils.recursivelyEnumerate(input);
 
-          filenames.forEach(filename =>
-            processFile(filename, path.relative(input, filename))
-          );
+          filenames.forEach(filename => {
+            transpileFile(filename, path.relative(input, filename));
+          });
 
 Otherwise the path is a file and can be processed directly with its basename as
 the relative output path.
