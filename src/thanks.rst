@@ -1,6 +1,6 @@
 Thanks
 ------
-Thank you to the project contributors including:
+Thank you to project contributors including:
 
 - `Daithi O Crualaoich <https://github.com/daithiocrualaoich>`_
 - `Pascal Hartig <https://github.com/passy>`_
