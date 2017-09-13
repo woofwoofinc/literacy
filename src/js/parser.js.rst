@@ -226,7 +226,7 @@ Otherwise, the line is regular text with optional indentation.
 
 
 Exports
--------
+~~~~~~~
 The module export is a function to detab and parse the input content.
 
 .. code-block:: javascript

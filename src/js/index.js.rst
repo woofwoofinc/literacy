@@ -13,7 +13,7 @@ JavaScript blocks concatenated together with a sourcemap.
 
     module.exports.fromFileContents = function fromFileContents(inputFilename, input) {
 
-Start a `source map`_ for the output. The Literacy ``.js.rst`` file format is
+Start a `source maps`_ for the output. The Literacy ``.js.rst`` file format is
 impractical without access to debugger tools or stacktrace line number
 translation so source maps are essential.
 

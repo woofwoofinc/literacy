@@ -1538,15 +1538,15 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-literacy-loader@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/literacy-loader/-/literacy-loader-0.2.5.tgz#e9840892e486b235c8853bb91b25879d876f91b9"
+literacy-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/literacy-loader/-/literacy-loader-1.0.0.tgz#2ef51442263e65571ed6bc83a455e1ba2fc58ec6"
   dependencies:
-    literacy "^0.2.5"
+    literacy "^1.0.0"
 
-literacy@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/literacy/-/literacy-0.2.5.tgz#7849cc34b299c92e51fd7865f4047b4b8e2770c9"
+literacy@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/literacy/-/literacy-1.0.0.tgz#b92c176ef6954d591cf5a04893430db352f8a053"
   dependencies:
     detab "^2.0.1"
     fs-extra "^4.0.1"
