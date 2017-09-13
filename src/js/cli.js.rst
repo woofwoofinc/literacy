@@ -1,8 +1,8 @@
 Command Line Interface
 ----------------------
-The Literacy command line interface for compiling ``.js.rst`` files. Use this
-for production environments to pre-generate JavaScript files from ``.js.rst``
-code blocks instead of incorporating the require hook.
+The Literacy command line interface for compiling ``.js.rst`` and ``.json.rst``
+files. Use this for production environments to pre-generate JavaScript files
+from reStructured Text code blocks instead of incorporating the require hook.
 
 .. code-block:: javascript
 
@@ -22,9 +22,9 @@ help. The options and names follow the `babel-cli`_ tool.
     const argv = require('yargs')
       .usage(
         '\n' +
-        'Literate programming in JavaScript using reStructuredText. This ' +
-        'command extracts code blocks from `.js.rst` reStructuredText ' +
-        'files.\n' +
+        'Literate programming in JavaScript using reStructured Text. This ' +
+        'command extracts code blocks from `.js.rst` and `.json.rst` ' +
+        'reStructured Text files.\n' +
         '\n' +
         'Usage: $0 [options] <paths>'
       )
@@ -36,11 +36,11 @@ stdin processing. More than one input file or directory source may be used.
 
       .demandCommand(1)
 
-To specify output generation to a single file use ``--out-file``.
+To specify output generation to a file use ``--out-file``.
 
 .. code-block:: javascript
 
-      .describe('out-file', 'Compile to a single output file')
+      .describe('out-file', 'Compile to an output file')
       .string('out-file')
       .alias('o', 'out-file')
 
@@ -52,14 +52,14 @@ To specify output generation to a directory ``--out-dir``.
       .string('out-dir')
       .alias('d', 'out-dir')
 
-When the input source is a directory, files other than ``.js.rst`` files are
-ignored. If the output is also a directory then it may be desireable in a build
-workflow to copy these files verbatim instead of ignoring them. This can be
-specified with the ``--copy-files`` flag.
+When the input source is a directory, files other than ``.js.rst`` and
+``.json.rst`` files are ignored. If the output is also a directory then it may
+be desireable in a build workflow to copy these files verbatim instead of
+ignoring them. This can be specified with the ``--copy-files`` flag.
 
 .. code-block:: javascript
 
-      .describe('copy-files', 'Copy non-js.rst files to output directory')
+      .describe('copy-files', 'Copy unprocessed files to output directory')
       .boolean('copy-files')
       .alias('D', 'copy-files')
 
@@ -158,7 +158,7 @@ Disallow multiple input files for the output file option. The Literacy
 command line tool focuses on a single task, transpilation of ``.js.rst`` to
 ``.js``. For concatenation or minification, etc, use a follow-up build step.
 
-The input must also be a ``.js.rst`` file, not a directory.
+The input must also be a ``.js.rst`` or ``.json.rst`` file, not a directory.
 
 .. code-block:: javascript
 
@@ -167,8 +167,8 @@ The input must also be a ``.js.rst`` file, not a directory.
         errors.push('Must have exactly one input file for --out-file.');
       } else if (fs.statSync(inputs[0]).isDirectory()) {
         errors.push('Input file cannot be a directory for --out-file.');
-      } else if (!inputs[0].endsWith('.js.rst')) {
-        errors.push('Input file must be `.js.rst` for --out-file.');
+      } else if (!inputs[0].endsWith('.js.rst') && !inputs[0].endsWith('.json.rst')) {
+        errors.push('Input file must be `.js.rst` or `.json.rst` for --out-file.');
       }
     }
 
@@ -196,7 +196,7 @@ Process the input file using the Literacy module and perform the output.
 
 .. code-block:: javascript
 
-    function transpileJsRstFile(inputFile, outputFile) {
+    function transpileRstFile(inputFile, outputFile) {
       try {
         const output = literacy.fromFile(inputFile);
 
@@ -216,14 +216,15 @@ Process the input file using the Literacy module and perform the output.
     }
 
     if (outFileFlagPresent) {
-      transpileJsRstFile(inputs[0], argv.outFile);
+      transpileRstFile(inputs[0], argv.outFile);
     }
 
 
 Compile Directory
 ~~~~~~~~~~~~~~~~~
-Compile the ``.js.rst`` files from a source directory and output to another
-directory. This doesn’t overwrite any other files or directories in the output.
+Compile the ``.js.rst`` and ``.json.rst`` files from a source directory and
+output to another directory. This doesn’t overwrite any other files or
+directories in the output.
 
 Use ``--out-file`` or ``-o`` for the output directory name.
 
@@ -256,8 +257,8 @@ to the input paths.
   intermediate directories.
 
 Start by defining how an individual file is handled. This includes the cases of
-``.js.rst`` files, other files when ``--copy-files`` is specified, and skipped
-files.
+``.js.rst`` and ``.json.rst`` files, other files when ``--copy-files`` is
+specified, and skipped files.
 
 .. code-block:: javascript
 
@@ -266,17 +267,18 @@ files.
     function transpileFile(inputFile, relativeOutputFile) {
       try {
 
-For ``.js.rst`` files, calculate the correct output filename by joining the
-relative output filename to ``--out-dir`` and trimming ``.rst`` from the
-``.js.rst`` suffix. Then use the single file compilation code path.
+For ``.js.rst`` and ``.json.rst`` files, calculate the correct output filename
+by joining the relative output filename to ``--out-dir`` and trimming ``.rst``
+from the ``.js.rst`` or ``.json.rst`` suffix. Then use the single file
+compilation code path.
 
 .. code-block:: javascript
 
         let outputFile = path.join(argv.outDir, relativeOutputFile);
 
-        if (inputFile.endsWith('.js.rst')) {
+        if (inputFile.endsWith('.js.rst') || inputFile.endsWith('json.rst')) {
           outputFile = outputFile.slice(0, -4);
-          transpileJsRstFile(inputFile, outputFile);
+          transpileRstFile(inputFile, outputFile);
 
 Copy non-``.js.rst`` files to the target location if ``--copy-files`` was
 specified, otherwise skip.
