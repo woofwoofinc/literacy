@@ -72,7 +72,7 @@ acbuild run -- rm node-v${NODE_VERSION}-linux-x64.tar.xz
 # Yarn
 ################################################################################
 
-YARN_VERSION=1.0.1
+YARN_VERSION=1.0.2
 
 acbuild run -- wget -q https://github.com/yarnpkg/yarn/releases/download/v${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz
 acbuild run -- tar xzf yarn-v${YARN_VERSION}.tar.gz -C /usr/ --strip-components=1
