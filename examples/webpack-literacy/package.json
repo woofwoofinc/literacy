@@ -1,7 +1,7 @@
 {
   "name": "webpack-literacy",
   "description": "Example Webpack project using .js.rst source files.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "(Apache-2.0 OR MIT)",
   "scripts": {
     "build": "webpack -p"
@@ -10,7 +10,7 @@
     "eslint": "^4.6.0",
     "eslint-config-strict": "^14.0.0",
     "eslint-loader": "^1.9.0",
-    "literacy-loader": "^1.0.0",
+    "literacy-loader": "^1.1.0",
     "webpack": "^3.5.5"
   },
   "eslintConfig": {
