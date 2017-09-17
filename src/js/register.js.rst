@@ -1,8 +1,8 @@
 Register ``.js.rst`` File Extension
 -----------------------------------
-Intercept Node module loading for filenames ending in ``.js.rst``. This allows
-``.js.rst`` files to be passed to ``require`` calls without including the
-suffix.
+Intercept Node module loading for filenames ending in ``.js.rst`` or
+``.json.rst``. This allows ``.js.rst`` and ``.json.rst`` files to be passed to
+``require`` calls without including the suffix.
 
 Implementation is copied from `register.coffee`_ in CoffeeScript and is similar
 to `babel-register`_.
@@ -22,21 +22,22 @@ time.
 
 Strictly speaking it should not be used. However:
 
-- Only this module uses ``.js.rst`` suffixes.
+- Only this module uses ``.js.rst`` and ``.json.rst`` suffixes.
 - The Node module containing the ``require.extensions`` implementation is
   locked so Node is committed to keeping the current form indefinitely.
-- Production use cases are encouraged to precompile ``.js.rst`` sources.
+- Production use cases are encouraged to precompile ``.js.rst`` and
+  ``.json.rst`` sources.
 
 For ``.js.rst`` loads, read the file contents and use the parser defined in
-``index.js.rst`` to extract the JavaScript codeblocks from the reStructuredText.
-This material is passed to ``module._compile`` for compilation and incorporation
-into the running environment.
+``index.js.rst`` to extract the JavaScript codeblocks from the reStructured
+Text. This material is passed to ``module._compile`` for compilation and
+incorporation into the running environment.
 
 .. code-block:: javascript
 
     const literacy = require('./index.js');
 
-    function loadFile(module, filename) {
+    function loadJsRstFile(module, filename) {
       const javaScript = literacy.fromFile(filename).content;
       module._compile(javaScript, filename);
     }
@@ -46,13 +47,27 @@ Add this ``.js.rst`` file extension handler to ``require.extensions``.
 .. code-block:: javascript
 
     if (require.extensions) {
-      require.extensions['.js.rst'] = loadFile;
+      require.extensions['.js.rst'] = loadJsRstFile;
     }
 
-This is not enough unfortunately since although the ``.js.rst`` extension is
-registered, the Node module loader isn't able to handle multi-part extensions.
-For this, we follow CoffeeScript in reimplementing Module::load to support
-multi-part extension handling.
+Similarly for ``.json.rst`` files except parse the JSON content instead of
+passing it to ``module._compile``.
+
+.. code-block:: javascript
+
+    function loadJsonRstFile(module, filename) {
+      const json = literacy.fromFile(filename).content;
+      module.exports = JSON.parse(json);
+    }
+
+    if (require.extensions) {
+      require.extensions['.json.rst'] = loadJsonRstFile;
+    }
+
+This is not enough unfortunately since although the ``.js.rst`` and
+``.json.rst`` extensions are registered, the Node module loader isn't able to
+handle multi-part extensions. For this, we follow CoffeeScript in reimplementing
+Module::load to support multi-part extension handling.
 
     "This is a horrible thing that should not be required."
 

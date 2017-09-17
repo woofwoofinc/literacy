@@ -118,14 +118,22 @@ equal indentation level.
 .. code-block:: javascript
 
       `
-      CODE_DIRECTIVE = indent:[ ]* '.. ' CODE_DIRECTIVE_NAME ':: javascript'i BLANK DIRECTIVE_OPTION* {
+      CODE_DIRECTIVE = indent:[ ]* tag:CODE_DIRECTIVE_TAG BLANK DIRECTIVE_OPTION* {
         return {
-          type: 'javascript',
+          type: 'code',
+          language: tag.language,
           indent: indent.length,
         }
       }
 
+      CODE_DIRECTIVE_TAG = '.. ' CODE_DIRECTIVE_NAME ':: ' language:CODE_DIRECTIVE_LANGUAGE {
+        return {
+          language: language,
+        }
+      }
+
       CODE_DIRECTIVE_NAME = 'code-block'i / 'sourcecode'i / 'code'i
+      CODE_DIRECTIVE_LANGUAGE = 'javascript'i / 'json'i
       `,
 
 Code block directives_ are allowed to take options.
