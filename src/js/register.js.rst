@@ -1,5 +1,5 @@
 Register ``.js.rst`` File Extension
------------------------------------
+===================================
 Intercept Node module loading for filenames ending in ``.js.rst`` or
 ``.json.rst``. This allows ``.js.rst`` and ``.json.rst`` files to be passed to
 ``require`` calls without including the suffix.

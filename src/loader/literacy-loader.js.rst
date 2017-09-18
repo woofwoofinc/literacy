@@ -1,5 +1,5 @@
 Webpack Loader
---------------
+==============
 Webpack_ is a extensible JavaScript module bundler. It can be configured with
 custom loaders_ to support loading filetypes which are not natively supported.
 
