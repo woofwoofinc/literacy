@@ -1,6 +1,6 @@
 Thanks
-------
-Thank you to project contributors including:
+======
+Thank you to the project contributors including:
 
 - `Daithi O Crualaoich <https://github.com/daithiocrualaoich>`_
 - `Pascal Hartig <https://github.com/passy>`_
@@ -11,7 +11,7 @@ Literacy is a combination of `Literate CoffeeScript`_, Webpack_, and Babel_.
 .. _Webpack: https://webpack.js.org
 .. _Babel: https://babeljs.io
 
-This project stack is built upon the work of everybody who has contributed to
+This project is built upon the work of everybody who has contributed to
 `Node.js`_, Yarn_, Yargs_, `PEG.js`_, Lodash_, and all the other modules this
 stack depends on.
 

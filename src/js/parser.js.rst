@@ -1,5 +1,5 @@
 Parser
-------
+======
 There are six ways of indicating code blocks in a reStructuredText document
 that Literacy will correctly interpret as JavaScript code to include.
 
@@ -234,7 +234,7 @@ Otherwise, the line is regular text with optional indentation.
 
 
 Exports
-~~~~~~~
+-------
 The module export is a function to detab and parse the input content.
 
 .. code-block:: javascript

@@ -1,8 +1,11 @@
-Utility Functions
------------------
+Utilities
+=========
+Small support functions module for non-application logic. Extracted from the
+main source files to reduce boilerplate.
+
 
 Recursive Directory Enumeration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 Since input paths may be directories, we need to be able to enumerate the
 contents of directories recursively.
 
@@ -22,7 +25,7 @@ contents of directories recursively.
 
 
 Glob Expansion
-~~~~~~~~~~~~~~
+--------------
 Paths may be specified using glob_ wildcard syntax. Expand the provided inputs
 to an array of non-wildcard paths.
 

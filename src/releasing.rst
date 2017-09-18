@@ -100,10 +100,9 @@ First build the documentation as described in :ref:`documentation`.
 
 The GitHub configuration for this project is to serve documentation from the
 ``gh-pages`` branch. Rather than attempt to build a new ``gh-pages`` in the
-current repository, it is simpler to copy the repository, change to
-``gh-pages`` in the repository copy, and clean everything from there. This has
-the advantage of not operating in the current repository too so it is
-non-destructive.
+current repository, it is simpler to copy the repository, change to ``gh-pages``
+in the repository copy, and clean everything from there. This has the advantage
+of not operating in the current repository too so it is non-destructive.
 
 Create a copy of the repository.
 

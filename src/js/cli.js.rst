@@ -1,5 +1,5 @@
 Command Line Interface
-----------------------
+======================
 The Literacy command line interface for compiling ``.js.rst`` and ``.json.rst``
 files. Use this for production environments to pre-generate JavaScript files
 from reStructured Text code blocks instead of incorporating the require hook.
@@ -10,7 +10,7 @@ from reStructured Text code blocks instead of incorporating the require hook.
 
 
 Option Handling
-~~~~~~~~~~~~~~~
+---------------
 The command line interface uses Yargs_ for option parsing, basic validation, and
 help. The options and names follow the `babel-cli`_ tool.
 
@@ -107,7 +107,7 @@ path locations.
 
 
 Validation
-~~~~~~~~~~
+----------
 Basic validation of flags is included in Yargs. While Yargs can be configured to
 reject if two flags are present, the output message is not user-friendly. So we
 use manual validation for the conflict case where ``--out-file`` and
@@ -184,7 +184,7 @@ error cause for this.
 
 
 Compile Single File
-~~~~~~~~~~~~~~~~~~~
+-------------------
 Compile a single file ``examples/blocks.js.rst`` and output to a file. Uses
 ``--out-file`` or ``-o`` for the output filename.
 
@@ -221,7 +221,7 @@ Process the input file using the Literacy module and perform the output.
 
 
 Compile Directory
-~~~~~~~~~~~~~~~~~
+-----------------
 Compile the ``.js.rst`` and ``.json.rst`` files from a source directory and
 output to another directory. This doesn’t overwrite any other files or
 directories in the output.
