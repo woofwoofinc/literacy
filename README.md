@@ -1,7 +1,8 @@
 # ![Literary](https://raw.githubusercontent.com/woofwoofinc/literacy/master/src/assets/title.png)
 
-[![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](https://github.com/woofwoofinc/literacy#license)
 [![NPM](https://img.shields.io/npm/v/literacy.svg)](https://www.npmjs.com/package/literacy)
+[![Build Status](https://travis-ci.org/woofwoofinc/literacy.svg?branch=master)](https://travis-ci.org/woofwoofinc/literacy)
+[![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg)](https://github.com/woofwoofinc/literacy#license)
 
 Literate programming in JavaScript using [reStructuredText].
 
