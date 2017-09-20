@@ -40,15 +40,15 @@ file and output to a file.
 
     $ literacy examples/blocks.js.rst --out-file blocks.js
 
-The `.js.rst` files from an entire source directory can be processed and output
-to another directory retaining the relative path prefixes. This doesn’t
-overwrite any other files or directories in the output. Use `-out-dir` to
-specify an output directory.
+The `.js.rst` or `.json.rst` files from an entire source directory can be
+processed and output to another directory retaining the relative path prefixes.
+This doesn’t overwrite any other files or directories in the output. Use
+`-out-dir` to specify an output directory.
 
     $ literacy --out-dir lib src
 
-To also copy the files which are not `.js.rst` files from the source directory
-to the output directory, include the `--copy-files` option.
+To also copy the files which are not `.js.rst` or `.json.rst` files from the
+source directory to the output directory, include the `--copy-files` option.
 
     $ literacy --copy-files --out-dir lib src
 
@@ -110,12 +110,44 @@ details.
 [NPM Webpack loader]: https://www.npmjs.com/package/literacy-loader
 
 
+Developing
+----------
+The project build stack uses [Node.js] and the [Yarn] package manager. Install
+these on your system if they are not already available.
+
+[Node.js]: https://nodejs.org
+[Yarn]: https://yarnpkg.com
+
+A [rkt] container build script is included in the project repository and
+provides an installation which can be used to build the project also. See the
+description on building and running the container in the Development Tools
+Container section of the documentation for more information.
+
+[rkt]: https://coreos.com/rkt
+
+For macOS, [RktMachine] provides a CoreOS VM which supports developing using
+the rkt container system.
+
+[RktMachine]: https://github.com/woofwoofinc/rktmachine
+
+Start by installing [Literacy] and the other project dependencies using
+Yarn.
+
+[Literacy]: https://github.com/woofwoofinc/literacy
+
+    $ yarn
+
+Then build the project:
+
+    $ yarn build
+
+
 License
 -------
 This work is dual-licensed under the Apache License, Version 2.0 and under the
 MIT Licence.
 
-You may licence this work under the Apache License, Version 2.0.
+You may license this work under the Apache License, Version 2.0.
 
     Copyright 2017 Woof Woof, Inc. contributors
 
@@ -131,7 +163,7 @@ You may licence this work under the Apache License, Version 2.0.
     See the License for the specific language governing permissions and
     limitations under the License.
 
-Alternatively, you may licence this work under the MIT Licence at your option.
+Alternatively, you may license this work under the MIT Licence at your option.
 
     Copyright (c) 2017 Woof Woof, Inc. contributors
 

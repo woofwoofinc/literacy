@@ -29,6 +29,7 @@ Development
    :maxdepth: 1
 
    dev
+   building
    documentation
    releasing
 
