@@ -8,3 +8,5 @@ src/_build
 node_modules
 lib
 *.map
+
+yarn-error.log
