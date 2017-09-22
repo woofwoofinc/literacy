@@ -7,7 +7,7 @@ is placed in ``src/_build/html``.
 
 .. _Sphinx: http://www.sphinx-doc.org
 
-.. code:: bash
+::
 
     cd src
     make clean html
