@@ -29,7 +29,7 @@ additional custom styles.
 .. _Ryan Roemer: https://github.com/ryan-roemer
 .. _Bootswatch: http://bootswatch.com
 
-README badging provided by by `Travis CI`_ and `Shields.io`_.
+README badging provided by `Travis CI`_ and `Shields.io`_.
 
 .. _Travis CI: https://travis-ci.org
 .. _Shields.io: https://shields.io
