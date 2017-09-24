@@ -177,7 +177,7 @@ error cause for this.
 
 .. code-block:: javascript
 
-    if (errors.length) {
+    if (errors.length > 0) {
       console.error(`ERROR: ${ errors[0] }`);
       process.exit(1);
     }
