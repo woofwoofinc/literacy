@@ -140,7 +140,7 @@ Yarn.
 Then build the project:
 
     $ yarn build
-    
+
 If you want to help extend and improve this project, then your contributions
 would be greatly appreciated. Check out our [GitHub issues] for ideas or a
 place to ask questions. Welcome to the team!
