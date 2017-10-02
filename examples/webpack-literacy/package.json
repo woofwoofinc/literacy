@@ -7,11 +7,13 @@
     "build": "webpack -p"
   },
   "dependencies": {
+    "copy-webpack-plugin": "^4.0.1",
     "eslint": "^4.7.2",
     "eslint-config-strict": "^14.0.0",
     "eslint-loader": "^1.9.0",
     "literacy-loader": "^1.1.0",
-    "webpack": "^3.6.0"
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
   },
   "eslintConfig": {
     "extends": "strict",

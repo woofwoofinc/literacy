@@ -84,7 +84,7 @@ acbuild run -- rm yarn-v${YARN_VERSION}.tar.gz
 ################################################################################
 
 acbuild run -- yarn global add --no-progress webpack@3.6.0
-acbuild run -- yarn global add --no-progress webpack-dev-server@2.8.2
+acbuild run -- yarn global add --no-progress webpack-dev-server@2.9.1
 
 
 ################################################################################
