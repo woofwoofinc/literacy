@@ -12,6 +12,7 @@ Webpack uses `node-interpret`_ for file extension handling when reading
 .. code-block:: javascript
 
     const path = require('path');
+    const CopyWebpackPlugin = require('copy-webpack-plugin');
 
     module.exports = {
 
@@ -46,7 +47,7 @@ extension.
 
 .. code-block:: javascript
 
-      entry: './src/main',
+      entry: './main',
 
 The rest of the Webpack configuration is unchanged. Here we indicate that the
 bundled files should be output to ``./dist/bundle.js``. After running
@@ -55,18 +56,21 @@ input content is present.
 
 .. code-block:: javascript
 
+      context: path.resolve(__dirname, './src'),
       output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
       },
 
-Run a development server with recompilation on page refresh.
+CopyWebpackPlugin to copy ``index.html`` to the output directory.
 
 .. code-block:: javascript
 
-      devServer: {
-        contentBase: path.resolve(__dirname, './src')
-      },
+      plugins: [
+        new CopyWebpackPlugin([
+          { from: 'index.html' }
+        ])
+      ],
 
 Generate source maps to show original ``.rst.js`` files in browser debugger
 tools.
