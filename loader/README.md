@@ -51,7 +51,7 @@ Include a rule in `modules.exports.modules` for handing `.js.rst` files.
     module: {
       rules: [
         {
-          test: /\.js\.rst/,
+          test: /\.js\.rst$/,
           use: [
             'literacy-loader'
           ]
