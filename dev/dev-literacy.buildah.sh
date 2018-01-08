@@ -102,6 +102,7 @@ buildah run $IMAGE -- apt-get -qq clean
 echo "nameserver 8.8.8.8" > resolv.conf
 buildah copy $IMAGE resolv.conf /etc/resolv.conf
 
+buildah config $IMAGE --port 8080
 buildah config $IMAGE --entrypoint /bin/bash
 
 buildah commit -rm $IMAGE $IMAGE
