@@ -19,7 +19,7 @@ Build the container using the provided build script:
 
 ::
 
-    ./dev-literacy.buildah.sh
+    sudo ./dev-literacy.buildah.sh
 
 This will make a ``dev-literacy.oci`` in the directory. Convert this to
 ``dev-literacy.aci`` for installation into rkt:
