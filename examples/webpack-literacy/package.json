@@ -7,6 +7,9 @@
     "build": "webpack -p"
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
     "copy-webpack-plugin": "^4.4.1",
     "eslint": "^4.17.0",
     "eslint-config-strict": "^14.0.1",
