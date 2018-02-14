@@ -14,12 +14,17 @@ Webpack uses `node-interpret`_ for file extension handling when reading
     const path = require('path');
     const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-    module.exports = {
+Add plugin is to use UglifyJS to perform minification.
+
+.. code-block:: javascript
+
+    const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 Enable ``.js.rst`` requires without suffix.
 
 .. code-block:: javascript
 
+    module.exports = {
       resolve: {
         extensions: ['.js', '.json', '.js.rst']
       },
@@ -33,6 +38,7 @@ Include a rule in ``modules.exports.modules`` for handing ``.js.rst`` files.
           {
             test: /\.js\.rst$/,
             use: [
+              'babel-loader',
               'eslint-loader',
               'literacy-loader',
             ]
@@ -69,7 +75,15 @@ CopyWebpackPlugin to copy ``index.html`` to the output directory.
       plugins: [
         new CopyWebpackPlugin([
           { from: 'index.html' }
-        ])
+        ]),
+
+And for UglifyJS minification.
+
+.. code-block:: javascript
+
+        new UglifyJsPlugin({
+           sourceMap: true
+        }),
       ],
 
 Generate source maps to show original ``.rst.js`` files in browser debugger
