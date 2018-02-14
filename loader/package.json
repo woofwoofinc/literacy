@@ -1,7 +1,7 @@
 {
   "name": "literacy-loader",
   "description": "Webpack loader for Literacy .js.rst files.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "(Apache-2.0 OR MIT)",
   "homepage": "https://github.com/woofwoofinc/literacy",
   "repository": {
@@ -13,7 +13,7 @@
     "build": "literacy ../src/loader --out-dir lib && eslint ."
   },
   "dependencies": {
-    "literacy": "^1.1.0"
+    "literacy": "^1.1.1"
   },
   "devDependencies": {
     "eslint": "^4.17.0",
