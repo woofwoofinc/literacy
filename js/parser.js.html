@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Parser &#8212; Literacy</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/woofwoofinc.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Command Line Interface" href="cli.js.html" />
+    <link rel="prev" title="Literacy" href="index.js.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Literacy</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.1.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.js.html">Literacy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parser</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#exports">Exports</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.js.html">Command Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli.js.html#option-handling">Option Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.js.html#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.js.html#compile-single-file">Compile Single File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.js.html#compile-directory">Compile Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="register.js.html">Register <code class="docutils literal"><span class="pre">.js.rst</span></code> File Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.js.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.js.html#recursive-directory-enumeration">Recursive Directory Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.js.html#glob-expansion">Glob Expansion</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../loader/literacy-loader.js.html">Webpack Loader</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development Tools Container</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#building">Building</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html">Releasing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../releasing.html#publishing-to-npm">Publishing to NPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasing.html#publishing-webpack-loader-to-npm">Publishing Webpack Loader to NPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasing.html#publishing-the-documentation">Publishing the Documentation</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="index.js.html" title="Previous Chapter: Literacy"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Literacy</span>
+    </a>
+  </li>
+  <li>
+    <a href="cli.js.html" title="Next Chapter: Command Line Interface"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Command Line ... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="parser">
+<h1>Parser<a class="headerlink" href="#parser" title="Permalink to this headline">¶</a></h1>
+<p>There are six ways of indicating code blocks in a reStructuredText document
+that Literacy will correctly interpret as JavaScript code to include.</p>
+<ul>
+<li><p class="first">The first is by using the <a class="reference external" href="http://www.sphinx-doc.org/en/stable/markup/code.html#directive-code-block">code block directive syntax</a>. This requires a
+<code class="docutils literal"><span class="pre">..</span> <span class="pre">code-block::</span> <span class="pre">javascript</span></code> directive in a new paragraph, i.e. separated
+from the previous reStructedText element by a blank line. The language
+argument must be <code class="docutils literal"><span class="pre">javascript</span></code> or the block will be omitted. The directive
+and the language argument are case insensitive.</p>
+<p>The indented contents below the directive are interpreted as the body of
+the block. The block finishes at the outdent to the same level as or higher
+than the directive line indentation.</p>
+</li>
+<li><p class="first">The directive name <code class="docutils literal"><span class="pre">sourcecode</span></code> can be used as a direct replacement for
+<code class="docutils literal"><span class="pre">code-block</span></code> in this syntax.</p>
+</li>
+<li><p class="first">The directive name <code class="docutils literal"><span class="pre">code</span></code> can also be used as a direct replacement for
+<code class="docutils literal"><span class="pre">code-block</span></code> in this syntax.</p>
+</li>
+<li><p class="first">Literal blocks in a <code class="docutils literal"><span class="pre">.js.rst</span></code> are assumed to be code blocks and are
+included. They can be in expanded form with <code class="docutils literal"><span class="pre">::</span></code> on a separate paragraph
+opening line and with content indented underneath.</p>
+</li>
+<li><p class="first">Partially minimized literal blocks are also interpreted as code. This is
+where the <code class="docutils literal"><span class="pre">::</span></code> from a literal block is inlined onto the last line of the
+previous paragraph with intermediate spacing before the <code class="docutils literal"><span class="pre">::</span></code>.</p>
+</li>
+<li><p class="first">Finally, fully minimized literal blocks are also supported. These are the
+same as partially minimized literal blocks except the space is omitted
+between the end of the paragraph and the <code class="docutils literal"><span class="pre">::</span></code>.</p>
+</li>
+</ul>
+<p>Quoted literal blocks are not supported. These are literal blocks which are
+not indented. Instead each line of the block begins with the same character.
+This is not commonly used for source code in reStructuredText.</p>
+<p>The <code class="docutils literal"><span class="pre">literalinclude</span></code> directive is also not supported since it is used to
+include entire sourcefiles. These can be required directly without Literacy.</p>
+<p>Parsing is implemented as a <a class="reference external" href="https://github.com/PhilippeSigaud/Pegged/wiki/PEG-Basics">PEG grammar</a> using the <a class="reference external" href="https://pegjs.org">PEG.js</a> library. PEG
+grammars are similar to context-free grammars except that in a multi-choice rule
+the choices are matched in order.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">peg</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;pegjs&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">rules</span> <span class="o">=</span> <span class="p">[</span>
+</pre></div>
+</div>
+<p>The grammar starts with the first rule. We take a line based approach in parsing
+and determine that the next read will be a line containing a code directive
+start line, a directive for something other than a code block, a literal block
+start line, a minified literal block start line, a blank line, or a line of
+regular text.</p>
+<p>Note that the order matters here since all the lines would match a regular line
+of text if they weren’t before it in the choice list. This would be ambiguous in
+a context-free grammar.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="s1">&#39;START = (CODE_DIRECTIVE / DIRECTIVE / LITERAL / MINIFIED_LITERAL / BLANK / TEXT)*&#39;</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>It is useful to include an explicit rule for a blank line of text. Usually, it
+would be essential for parsing reStructuredText since many elements are
+sensitive to blank lines, e.g. directives should have a blank line before them.
+Instead, we choose to be permissive in this parser and allow some syntax which
+is not strictly correct.</p>
+<p>The blank line is useful to us because it is equivalent to trailing whitespace
+followed by a newline which we want to allow in all of the rules. The rules
+for matching directives often are the actual criteria for the rule followed by
+a blank line match to run out the rest of the current line. This helps us to
+keep the parsing line based in all the rules.</p>
+<p>The parser produces output objects, one per line, which indicate the line type
+classification and other necessary information, like indentation level and text
+for output if relevent. This output object is created by the parser function in
+braces which follows the rule. The return from this function is considered the
+result object of the rule.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="sb">`</span>
+<span class="sb">BLANK = [ ]* EOL {</span>
+<span class="sb">  return {</span>
+<span class="sb">    type: &#39;blank&#39;,</span>
+<span class="sb">    text: &#39;&#39;,</span>
+<span class="sb">    lineNumber: location().start.line,</span>
+<span class="sb">  }</span>
+<span class="sb">}</span>
+
+<span class="sb">EOL = &#39;\\r\\n&#39; / &#39;\\n&#39; / &#39;\\r&#39;</span>
+<span class="sb">`</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>Indent is important for determining the end of a directive or literal block, so
+the remaining rules include a whitespace prefix. This is converted to an
+indentation count by the parser result function.</p>
+<p>A code directive line is some indentation followed by the directive name,
+e.g. <code class="docutils literal"><span class="pre">code-block</span></code>, <code class="docutils literal"><span class="pre">sourcecode</span></code>, or <code class="docutils literal"><span class="pre">code</span></code>. Then the <code class="docutils literal"><span class="pre">::</span></code> delimiter,
+a space and the language name.</p>
+<p>The <code class="docutils literal"><span class="pre">i</span></code> after string literals in the rule means the literal is matched case
+insensitive.</p>
+<p>This rule returns a line object with type <code class="docutils literal"><span class="pre">javascript</span></code> to mark that it is
+start of a JavaScript block. The extent of the block can be found by comparing
+the indentation levels of the following blocks to the indentation level of this
+block and stoping at the first non-blank subsequent line which has a smaller or
+equal indentation level.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="sb">`</span>
+<span class="sb">CODE_DIRECTIVE = indent:[ ]* tag:CODE_DIRECTIVE_TAG BLANK DIRECTIVE_OPTION* {</span>
+<span class="sb">  return {</span>
+<span class="sb">    type: &#39;code&#39;,</span>
+<span class="sb">    language: tag.language,</span>
+<span class="sb">    indent: indent.length,</span>
+<span class="sb">  }</span>
+<span class="sb">}</span>
+
+<span class="sb">CODE_DIRECTIVE_TAG = &#39;.. &#39; CODE_DIRECTIVE_NAME &#39;:: &#39; language:CODE_DIRECTIVE_LANGUAGE {</span>
+<span class="sb">  return {</span>
+<span class="sb">    language: language,</span>
+<span class="sb">  }</span>
+<span class="sb">}</span>
+
+<span class="sb">CODE_DIRECTIVE_NAME = &#39;code-block&#39;i / &#39;sourcecode&#39;i / &#39;code&#39;i</span>
+<span class="sb">CODE_DIRECTIVE_LANGUAGE = &#39;javascript&#39;i / &#39;json&#39;i</span>
+<span class="sb">`</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>Code block <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/directives.html">directives</a> are allowed to take options.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">:caption:</span> <span class="pre">&lt;text&gt;</span></code></li>
+<li><code class="docutils literal"><span class="pre">:emphasize-lines:</span> <span class="pre">&lt;comma</span> <span class="pre">separated</span> <span class="pre">integer</span> <span class="pre">list&gt;</span></code></li>
+<li><code class="docutils literal"><span class="pre">:linenos:</span></code></li>
+<li><code class="docutils literal"><span class="pre">:dedent:</span> <span class="pre">integer</span></code></li>
+<li><code class="docutils literal"><span class="pre">:number-lines:</span></code></li>
+</ul>
+<p>The common directive options are also supported.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">:name:</span> <span class="pre">&lt;text&gt;</span></code></li>
+<li><code class="docutils literal"><span class="pre">:class:</span> <span class="pre">&lt;text&gt;</span></code></li>
+</ul>
+<p>Directive options following a code directive are dropped completely.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="sb">`</span>
+<span class="sb">DIRECTIVE_OPTION = indent:[ ]* &#39;:&#39; [A-Za-z-]+ &#39;:&#39; (!EOL .)* BLANK</span>
+<span class="sb">`</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>It is necessary to distinguish the other directives in reStructuredText since
+they end in <code class="docutils literal"><span class="pre">::</span></code>. If these are not separately covered then they will be
+interpreted as code blocks by the fully minimized form of the literal block rule
+later.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="sb">`</span>
+<span class="sb">DIRECTIVE = indent:[ ]* &#39;.. &#39; [A-Za-z-]+ &#39;::&#39; BLANK {</span>
+<span class="sb">  return {</span>
+<span class="sb">    type: &#39;directive&#39;,</span>
+<span class="sb">    indent: indent.length,</span>
+<span class="sb">  }</span>
+<span class="sb">}</span>
+<span class="sb">`</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>A reStructuredText fully expanded literal block is <code class="docutils literal"><span class="pre">::</span></code> on a separate line.</p>
+<p>Aside, this also covers the minified literal block case when the <code class="docutils literal"><span class="pre">::</span></code> is
+attached to the paragraph but on a separate line, e.g. the line in the paragraph
+was broken just before the concluding <code class="docutils literal"><span class="pre">::</span></code>. Both result in the same parse
+action response so this is not a problem.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="sb">`</span>
+<span class="sb">LITERAL = indent:[ ]* &#39;::&#39; BLANK {</span>
+<span class="sb">  return {</span>
+<span class="sb">    type: &#39;javascript&#39;,</span>
+<span class="sb">    indent: indent.length,</span>
+<span class="sb">  }</span>
+<span class="sb">}</span>
+<span class="sb">`</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>The minified literal case is more difficult because a negative lookahead is
+needed. The critical part is <code class="docutils literal"><span class="pre">(!EOL</span> <span class="pre">!('::'</span> <span class="pre">BLANK)</span> <span class="pre">.)*</span> <span class="pre">'::'</span></code>. Here the
+parenthesed expression says match any number of characters on this line unless
+this are the beginning of <code class="docutils literal"><span class="pre">::</span></code> followed by optional blank material to the end
+of line.</p>
+<p>The <code class="docutils literal"><span class="pre">EOL</span></code> is needed in this negative look ahead since the parser is not line
+based naturally. If it was omitted then this rule would match most of the file
+greedily if there were any literal blocks in the file.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="sb">`</span>
+<span class="sb">MINIFIED_LITERAL = indent:[ ]* (!EOL !(&#39;::&#39; BLANK) .)* &#39;::&#39; BLANK {</span>
+<span class="sb">  return {</span>
+<span class="sb">    type: &#39;javascript&#39;,</span>
+<span class="sb">    indent: indent.length,</span>
+<span class="sb">  }</span>
+<span class="sb">}</span>
+<span class="sb">`</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>Otherwise, the line is regular text with optional indentation.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span>  <span class="sb">`</span>
+<span class="sb">  TEXT = indent:[ ]* characters:(!EOL character:. { return character })+ EOL? {</span>
+<span class="sb">    return {</span>
+<span class="sb">      type: &#39;text&#39;,</span>
+<span class="sb">      indent: indent.length,</span>
+<span class="sb">      text: indent.join(&#39;&#39;) + characters.join(&#39;&#39;),</span>
+<span class="sb">      lineNumber: location().start.line,</span>
+<span class="sb">    }</span>
+<span class="sb">  }</span>
+<span class="sb">  `</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="kr">const</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">peg</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">rules</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="section" id="exports">
+<h2>Exports<a class="headerlink" href="#exports" title="Permalink to this headline">¶</a></h2>
+<p>The module export is a function to detab and parse the input content.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">detab</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;detab&#39;</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">parse</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>
+</div>
+<p>Prep the input by detabing it to a tab stop of eight per the reStructuredText
+specification. This also means that the grammar rules can assume there is no
+tab whitespacing.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">detabbed</span> <span class="o">=</span> <span class="nx">detab</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Then parse and return the input content.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span>  <span class="k">return</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">detabbed</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

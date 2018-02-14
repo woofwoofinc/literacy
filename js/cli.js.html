@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Command Line Interface &#8212; Literacy</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/woofwoofinc.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Register .js.rst File Extension" href="register.js.html" />
+    <link rel="prev" title="Parser" href="parser.js.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Literacy</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.1.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.js.html">Literacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parser.js.html">Parser</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="parser.js.html#exports">Exports</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#option-handling">Option Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compile-single-file">Compile Single File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compile-directory">Compile Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="register.js.html">Register <code class="docutils literal"><span class="pre">.js.rst</span></code> File Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.js.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.js.html#recursive-directory-enumeration">Recursive Directory Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.js.html#glob-expansion">Glob Expansion</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../loader/literacy-loader.js.html">Webpack Loader</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development Tools Container</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#building">Building</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html">Releasing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../releasing.html#publishing-to-npm">Publishing to NPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasing.html#publishing-webpack-loader-to-npm">Publishing Webpack Loader to NPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasing.html#publishing-the-documentation">Publishing the Documentation</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="parser.js.html" title="Previous Chapter: Parser"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Parser</span>
+    </a>
+  </li>
+  <li>
+    <a href="register.js.html" title="Next Chapter: Register .js.rst File Extension"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Register .js.... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="command-line-interface">
+<h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h1>
+<p>The Literacy command line interface for compiling <code class="docutils literal"><span class="pre">.js.rst</span></code> and <code class="docutils literal"><span class="pre">.json.rst</span></code>
+files. Use this for production environments to pre-generate JavaScript files
+from reStructured Text code blocks instead of incorporating the require hook.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">literacy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./index&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="option-handling">
+<h2>Option Handling<a class="headerlink" href="#option-handling" title="Permalink to this headline">¶</a></h2>
+<p>The command line interface uses <a class="reference external" href="http://yargs.js.org">Yargs</a> for option parsing, basic validation, and
+help. The options and names follow the <a class="reference external" href="https://babeljs.io/docs/usage/cli">babel-cli</a> tool.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">argv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;yargs&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">usage</span><span class="p">(</span>
+    <span class="s1">&#39;\n&#39;</span> <span class="o">+</span>
+    <span class="s1">&#39;Literate programming in JavaScript using reStructured Text. This &#39;</span> <span class="o">+</span>
+    <span class="s1">&#39;command extracts code blocks from `.js.rst` and `.json.rst` &#39;</span> <span class="o">+</span>
+    <span class="s1">&#39;reStructured Text files.\n&#39;</span> <span class="o">+</span>
+    <span class="s1">&#39;\n&#39;</span> <span class="o">+</span>
+    <span class="s1">&#39;Usage: $0 [options] &lt;paths&gt;&#39;</span>
+  <span class="p">)</span>
+</pre></div>
+</div>
+<p>Require at least one input parameter. The Literacy command does not support
+stdin processing. More than one input file or directory source may be used.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">demandCommand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To specify output generation to a file use <code class="docutils literal"><span class="pre">--out-file</span></code>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;out-file&#39;</span><span class="p">,</span> <span class="s1">&#39;Compile to an output file&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">string</span><span class="p">(</span><span class="s1">&#39;out-file&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">alias</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;out-file&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To specify output generation to a directory <code class="docutils literal"><span class="pre">--out-dir</span></code>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;out-dir&#39;</span><span class="p">,</span> <span class="s1">&#39;Compile to an output directory&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">string</span><span class="p">(</span><span class="s1">&#39;out-dir&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">alias</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;out-dir&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When the input source is a directory, files other than <code class="docutils literal"><span class="pre">.js.rst</span></code> and
+<code class="docutils literal"><span class="pre">.json.rst</span></code> files are ignored. If the output is also a directory then it may
+be desireable in a build workflow to copy these files verbatim instead of
+ignoring them. This can be specified with the <code class="docutils literal"><span class="pre">--copy-files</span></code> flag.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;copy-files&#39;</span><span class="p">,</span> <span class="s1">&#39;Copy unprocessed files to output directory&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="kr">boolean</span><span class="p">(</span><span class="s1">&#39;copy-files&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">alias</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;copy-files&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Option to generate source maps for output JavaScript files.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;source-maps&#39;</span><span class="p">,</span> <span class="s1">&#39;Generate source maps for output files&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="kr">boolean</span><span class="p">(</span><span class="s1">&#39;source-maps&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">alias</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;source-maps&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Include a <code class="docutils literal"><span class="pre">--quiet</span></code> option to suppress the console messages when files are
+written.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span> <span class="s1">&#39;Suppress messages&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="kr">boolean</span><span class="p">(</span><span class="s1">&#39;quiet&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">alias</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;quiet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Add help and version option handling.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">help</span><span class="p">()</span>
+<span class="p">.</span><span class="nx">alias</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;help&#39;</span><span class="p">)</span>
+
+<span class="p">.</span><span class="nx">version</span><span class="p">()</span>
+<span class="p">.</span><span class="nx">alias</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now that the options are defined, run the Yargs processor over the command
+inputs to produce an object with the flag settings and values.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">argv</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Expand the input paths using glob expansion. This converts wildcard patterns to
+path locations.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">utils</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./utils&#39;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">expand</span><span class="p">(</span><span class="nx">argv</span><span class="p">.</span><span class="nx">_</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h2>
+<p>Basic validation of flags is included in Yargs. While Yargs can be configured to
+reject if two flags are present, the output message is not user-friendly. So we
+use manual validation for the conflict case where <code class="docutils literal"><span class="pre">--out-file</span></code> and
+<code class="docutils literal"><span class="pre">--out-dir</span></code> are both present.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">errors</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="kr">const</span> <span class="nx">outFileFlagPresent</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">argv</span><span class="p">.</span><span class="nx">outFile</span> <span class="o">!==</span> <span class="s1">&#39;undefined&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">outDirFlagPresent</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">argv</span><span class="p">.</span><span class="nx">outDir</span> <span class="o">!==</span> <span class="s1">&#39;undefined&#39;</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">outFileFlagPresent</span> <span class="o">&amp;&amp;</span> <span class="nx">outDirFlagPresent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;Cannot have --out-file and --out-dir.&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>One of <code class="docutils literal"><span class="pre">--out-file</span></code> or <code class="docutils literal"><span class="pre">--out-dir</span></code> is required.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">outFileFlagPresent</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">outDirFlagPresent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;Must have either --out-file or --out-dir.&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Similarly, Yargs can detect when a flag is present without another flag which it
+requires but the messaging is not user-friendly. So we use manual validation for
+the case where <code class="docutils literal"><span class="pre">--copy-files</span></code> has been provided but not <code class="docutils literal"><span class="pre">--out-dir</span></code>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">argv</span><span class="p">.</span><span class="nx">copyFiles</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">outDirFlagPresent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;--copy-files requires --out-dir.&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Verify the input paths exist.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs-extra&#39;</span><span class="p">);</span>
+
+<span class="nx">inputs</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">input</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span> <span class="nx">input</span> <span class="si">}</span><span class="sb"> not found.`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Disallow multiple input files for the output file option. The Literacy
+command line tool focuses on a single task, transpilation of <code class="docutils literal"><span class="pre">.js.rst</span></code> to
+<code class="docutils literal"><span class="pre">.js</span></code>. For concatenation or minification, etc, use a follow-up build step.</p>
+<p>The input must also be a <code class="docutils literal"><span class="pre">.js.rst</span></code> or <code class="docutils literal"><span class="pre">.json.rst</span></code> file, not a directory.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">outFileFlagPresent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">inputs</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;Must have exactly one input file for --out-file.&#39;</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">statSync</span><span class="p">(</span><span class="nx">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">isDirectory</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;Input file cannot be a directory for --out-file.&#39;</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">&#39;.js.rst&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">&#39;.json.rst&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;Input file must be `.js.rst` or `.json.rst` for --out-file.&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>None of these errors are recoverable so error out. Only need to specify a single
+error cause for this.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`ERROR: </span><span class="si">${</span> <span class="nx">errors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile-single-file">
+<h2>Compile Single File<a class="headerlink" href="#compile-single-file" title="Permalink to this headline">¶</a></h2>
+<p>Compile a single file <code class="docutils literal"><span class="pre">examples/blocks.js.rst</span></code> and output to a file. Uses
+<code class="docutils literal"><span class="pre">--out-file</span></code> or <code class="docutils literal"><span class="pre">-o</span></code> for the output filename.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>literacy examples/blocks.js.rst --out-file blocks.js
+</pre></div>
+</div>
+<p>Process the input file using the Literacy module and perform the output.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">transpileRstFile</span><span class="p">(</span><span class="nx">inputFile</span><span class="p">,</span> <span class="nx">outputFile</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">literacy</span><span class="p">.</span><span class="nx">fromFile</span><span class="p">(</span><span class="nx">inputFile</span><span class="p">);</span>
+
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">ensureFileSync</span><span class="p">(</span><span class="nx">outputFile</span><span class="p">);</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">outputFile</span><span class="p">,</span> <span class="nx">output</span><span class="p">.</span><span class="nx">content</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">argv</span><span class="p">.</span><span class="nx">quiet</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Output written to </span><span class="si">${</span> <span class="nx">outputFile</span> <span class="si">}</span><span class="sb">.`</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">argv</span><span class="p">.</span><span class="nx">sourceMaps</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span> <span class="nx">outputFile</span> <span class="si">}</span><span class="sb">.map`</span><span class="p">,</span> <span class="nx">output</span><span class="p">.</span><span class="nx">sourceMap</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Source map written to </span><span class="si">${</span> <span class="nx">outputFile</span> <span class="si">}</span><span class="sb">.map.`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">outFileFlagPresent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">transpileRstFile</span><span class="p">(</span><span class="nx">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">argv</span><span class="p">.</span><span class="nx">outFile</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile-directory">
+<h2>Compile Directory<a class="headerlink" href="#compile-directory" title="Permalink to this headline">¶</a></h2>
+<p>Compile the <code class="docutils literal"><span class="pre">.js.rst</span></code> and <code class="docutils literal"><span class="pre">.json.rst</span></code> files from a source directory and
+output to another directory. This doesn’t overwrite any other files or
+directories in the output.</p>
+<p>Use <code class="docutils literal"><span class="pre">--out-file</span></code> or <code class="docutils literal"><span class="pre">-o</span></code> for the output directory name.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>literacy --out-dir lib src
+</pre></div>
+</div>
+<p>Compile multiple directories into the output.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>literacy --out-dir lib examples src
+</pre></div>
+</div>
+<p>Can specify a combination of files, directories, and wildcards.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>literacy --out-dir lib examples/basic.js.rst src examples/webpack-literacy/**.js.rst
+</pre></div>
+</div>
+<p>Processing of the output directory case has to take a different approach from
+single file output since it is necessary to take account of filenames relative
+to the input paths.</p>
+<ul class="simple">
+<li>If an individual file is specified as an input path, then it is processed and
+any output written to a file of the same name but at the root of the output
+directory hierarchy.</li>
+<li>In the case that the input path is a directory then there is a root from which
+to take relative paths. Each file under the input directory path is processed
+and any output written to a file under the output directory retaining any
+intermediate directories.</li>
+</ul>
+<p>Start by defining how an individual file is handled. This includes the cases of
+<code class="docutils literal"><span class="pre">.js.rst</span></code> and <code class="docutils literal"><span class="pre">.json.rst</span></code> files, other files when <code class="docutils literal"><span class="pre">--copy-files</span></code> is
+specified, and skipped files.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">transpileFile</span><span class="p">(</span><span class="nx">inputFile</span><span class="p">,</span> <span class="nx">relativeOutputFile</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal"><span class="pre">.js.rst</span></code> and <code class="docutils literal"><span class="pre">.json.rst</span></code> files, calculate the correct output filename
+by joining the relative output filename to <code class="docutils literal"><span class="pre">--out-dir</span></code> and trimming <code class="docutils literal"><span class="pre">.rst</span></code>
+from the <code class="docutils literal"><span class="pre">.js.rst</span></code> or <code class="docutils literal"><span class="pre">.json.rst</span></code> suffix. Then use the single file
+compilation code path.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">outputFile</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">argv</span><span class="p">.</span><span class="nx">outDir</span><span class="p">,</span> <span class="nx">relativeOutputFile</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">inputFile</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">&#39;.js.rst&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nx">inputFile</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">&#39;json.rst&#39;</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nx">outputFile</span> <span class="o">=</span> <span class="nx">outputFile</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">);</span>
+  <span class="nx">transpileRstFile</span><span class="p">(</span><span class="nx">inputFile</span><span class="p">,</span> <span class="nx">outputFile</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Copy non-<code class="docutils literal"><span class="pre">.js.rst</span></code> files to the target location if <code class="docutils literal"><span class="pre">--copy-files</span></code> was
+specified, otherwise skip.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">argv</span><span class="p">.</span><span class="nx">copyFiles</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">ensureFileSync</span><span class="p">(</span><span class="nx">outputFile</span><span class="p">);</span>
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">copySync</span><span class="p">(</span><span class="nx">inputFile</span><span class="p">,</span> <span class="nx">outputFile</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">argv</span><span class="p">.</span><span class="nx">quiet</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Output written to </span><span class="si">${</span> <span class="nx">outputFile</span> <span class="si">}</span><span class="sb">.`</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">argv</span><span class="p">.</span><span class="nx">quiet</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Skipped </span><span class="si">${</span> <span class="nx">inputFile</span> <span class="si">}</span><span class="sb">.`</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Handle each input path in turn.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">outDirFlagPresent</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">inputs</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">input</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</pre></div>
+</div>
+<p>If the path is a directory path, then recursively enumerate the files in that
+directory and process each individually taking care to calculate the relative
+output path from the base input directory path.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">statSync</span><span class="p">(</span><span class="nx">input</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">filenames</span> <span class="o">=</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">recursivelyEnumerate</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>
+
+  <span class="nx">filenames</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">filename</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">transpileFile</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span> <span class="nx">path</span><span class="p">.</span><span class="nx">relative</span><span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="nx">filename</span><span class="p">));</span>
+  <span class="p">});</span>
+</pre></div>
+</div>
+<p>Otherwise the path is a file and can be processed directly with its basename as
+the relative output path.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">transpileFile</span><span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">input</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

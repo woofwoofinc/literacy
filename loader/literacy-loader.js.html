@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Webpack Loader &#8212; Literacy</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/woofwoofinc.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Development Tools Container" href="../dev.html" />
+    <link rel="prev" title="Utilities" href="../js/utils.js.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Literacy</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.1.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.js.html">Literacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/parser.js.html">Parser</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../js/parser.js.html#exports">Exports</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../js/cli.js.html">Command Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../js/cli.js.html#option-handling">Option Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../js/cli.js.html#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../js/cli.js.html#compile-single-file">Compile Single File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../js/cli.js.html#compile-directory">Compile Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../js/register.js.html">Register <code class="docutils literal"><span class="pre">.js.rst</span></code> File Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/utils.js.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../js/utils.js.html#recursive-directory-enumeration">Recursive Directory Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../js/utils.js.html#glob-expansion">Glob Expansion</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Webpack Loader</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development Tools Container</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#building">Building</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html">Releasing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../releasing.html#publishing-to-npm">Publishing to NPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasing.html#publishing-webpack-loader-to-npm">Publishing Webpack Loader to NPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../releasing.html#publishing-the-documentation">Publishing the Documentation</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conduct.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="../js/utils.js.html" title="Previous Chapter: Utilities"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Utilities</span>
+    </a>
+  </li>
+  <li>
+    <a href="../dev.html" title="Next Chapter: Development Tools Container"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Development T... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="webpack-loader">
+<h1>Webpack Loader<a class="headerlink" href="#webpack-loader" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://webpack.js.org">Webpack</a> is a extensible JavaScript module bundler. It can be configured with
+custom <a class="reference external" href="https://webpack.github.io/docs/loaders.html">loaders</a> to support loading filetypes which are not natively supported.</p>
+<p>We use this mechanism to support the use of Literacy and <code class="docutils literal"><span class="pre">.js.rst</span></code> files in
+Webpack projects. See the example project at <code class="docutils literal"><span class="pre">/examples/webpack-literacy</span></code> for
+details.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">literacy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;literacy&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The Webpack documentation on <a class="reference external" href="https://webpack.js.org/development/how-to-write-a-loader">writing loaders</a> outlines how to implement a new
+loader. For a case like <code class="docutils literal"><span class="pre">.js.rst</span></code> the implementation only needs a function to
+process <code class="docutils literal"><span class="pre">.js.rst</span></code> file content to the desired form, e.g. to run the main
+Literacy module operation.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">exports</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheable</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">cacheable</span><span class="p">();</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>Determine the Webpack input filename from the context and resource path so that
+it can be passed to the Literacy generator. An input filename is needed in order
+to create source maps.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span>    <span class="kr">const</span> <span class="nx">inputFilename</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">relative</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">resourcePath</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">literacy</span><span class="p">.</span><span class="nx">fromFileContents</span><span class="p">(</span><span class="nx">inputFilename</span><span class="p">,</span> <span class="nx">content</span><span class="p">);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">output</span><span class="p">.</span><span class="nx">content</span><span class="p">,</span> <span class="nx">output</span><span class="p">.</span><span class="nx">sourceMap</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

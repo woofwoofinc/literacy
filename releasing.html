@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Releasing &#8212; Literacy</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/woofwoofinc.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="Documentation" href="documentation.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Literacy</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.1.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="js/index.js.html">Literacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="js/parser.js.html">Parser</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="js/parser.js.html#exports">Exports</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="js/cli.js.html">Command Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="js/cli.js.html#option-handling">Option Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js/cli.js.html#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js/cli.js.html#compile-single-file">Compile Single File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js/cli.js.html#compile-directory">Compile Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="js/register.js.html">Register <code class="docutils literal"><span class="pre">.js.rst</span></code> File Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="js/utils.js.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="js/utils.js.html#recursive-directory-enumeration">Recursive Directory Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js/utils.js.html#glob-expansion">Glob Expansion</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="loader/literacy-loader.js.html">Webpack Loader</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development Tools Container</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#building">Building</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="building.html">Building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Releasing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#publishing-to-npm">Publishing to NPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#publishing-webpack-loader-to-npm">Publishing Webpack Loader to NPM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#publishing-the-documentation">Publishing the Documentation</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conduct.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="thanks.html">Thanks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="documentation.html" title="Previous Chapter: Documentation"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Documentation</span>
+    </a>
+  </li>
+  <li>
+    <a href="contributing.html" title="Next Chapter: Contributing"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Contributing &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="releasing">
+<h1>Releasing<a class="headerlink" href="#releasing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="publishing-to-npm">
+<h2>Publishing to NPM<a class="headerlink" href="#publishing-to-npm" title="Permalink to this headline">¶</a></h2>
+<p>Install the project development dependencies to get a bootstrap Literacy command
+if this hasn’t been done already.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">yarn</span>
+</pre></div>
+</div>
+<p>Build the <code class="docutils literal"><span class="pre">lib</span></code> directory contents for publication.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">fr</span> <span class="n">lib</span> <span class="o">&amp;&amp;</span> <span class="n">yarn</span> <span class="n">build</span>
+</pre></div>
+</div>
+<p>Login to the <a class="reference external" href="https://www.npmjs.com">npm registry</a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ npm login
+Username: woofwoofinc
+Password:
+Email: (this IS public) woofwoofinc@gmail.com
+Logged in as woofwoofinc on https://registry.npmjs.org/.
+</pre></div>
+</div>
+<p>Then publish.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ npm publish
++ literacy@1.0.0
+</pre></div>
+</div>
+<p>The latest version of the Literacy package can be verified in the npm registry
+at <a class="reference external" href="https://www.npmjs.com/package/literacy">literacy</a>.</p>
+</div>
+<div class="section" id="publishing-webpack-loader-to-npm">
+<h2>Publishing Webpack Loader to NPM<a class="headerlink" href="#publishing-webpack-loader-to-npm" title="Permalink to this headline">¶</a></h2>
+<p>This follows the same pattern as publishing the Literacy module except working
+from the <cite>loader</cite> directory.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">loader</span>
+</pre></div>
+</div>
+<p>Install the project development dependencies to get a bootstrap Literacy command
+if this hasn’t been done already.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">yarn</span>
+</pre></div>
+</div>
+<p>Build the <code class="docutils literal"><span class="pre">lib</span></code> directory contents for publication.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">fr</span> <span class="n">lib</span> <span class="o">&amp;&amp;</span> <span class="n">yarn</span> <span class="n">build</span>
+</pre></div>
+</div>
+<p>Login to the <a class="reference external" href="https://www.npmjs.com">npm registry</a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ npm login
+Username: woofwoofinc
+Password:
+Email: (this IS public) woofwoofinc@gmail.com
+Logged in as woofwoofinc on https://registry.npmjs.org/.
+</pre></div>
+</div>
+<p>Then publish.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ npm publish
++ literacy-loader@1.0.0
+</pre></div>
+</div>
+<p>The latest version of the Literacy package can be verified in the npm registry
+at <a class="reference external" href="https://www.npmjs.com/package/literacy-loader">literacy-loader</a>.</p>
+</div>
+<div class="section" id="publishing-the-documentation">
+<h2>Publishing the Documentation<a class="headerlink" href="#publishing-the-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Project documentation is published to <a class="reference external" href="https://woofwoofinc.github.io/literacy">woofwoofinc.github.io/literacy</a> using
+<a class="reference external" href="https://pages.github.com">GitHub Pages</a>.</p>
+<p>First build the documentation as described in <a class="reference internal" href="documentation.html#documentation"><span class="std std-ref">Documentation</span></a>.</p>
+<p>The GitHub configuration for this project is to serve documentation from the
+<code class="docutils literal"><span class="pre">gh-pages</span></code> branch. Rather than attempt to build a new <code class="docutils literal"><span class="pre">gh-pages</span></code> in the
+current repository, it is simpler to copy the repository, change to <code class="docutils literal"><span class="pre">gh-pages</span></code>
+in the repository copy, and clean everything from there. This has the advantage
+of not operating in the current repository too so it is non-destructive.</p>
+<p>Create a copy of the repository.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">literacy</span> <span class="n">literacy</span><span class="o">-</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span>
+</pre></div>
+</div>
+<p>Then change into the new repository and swap to the <code class="docutils literal"><span class="pre">gh-pages</span></code> branch.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pushd</span> <span class="n">literacy</span><span class="o">-</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">gh</span><span class="o">-</span><span class="n">pages</span>
+</pre></div>
+</div>
+<p>Clear out everything in the branch. This uses dot globing and extended glob
+options to arrange deletion of everything except the .git directory.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>shopt -s dotglob
+shopt -s extglob
+rm -fr !(.git)
+
+shopt -u extglob
+shopt -u dotglob
+</pre></div>
+</div>
+<p>Next, copy in the contents of <code class="docutils literal"><span class="pre">src/_build/html</span></code> from the main project
+repository. This is the latest build of the documentation. Dot globing is
+used again since the dot files in the <code class="docutils literal"><span class="pre">src/_build/html</span></code> directory are also
+needed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">shopt</span> <span class="o">-</span><span class="n">s</span> <span class="n">dotglob</span>
+<span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">../</span><span class="n">literacy</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">_build</span><span class="o">/</span><span class="n">html</span><span class="o">/*</span> <span class="o">.</span>
+
+<span class="n">shopt</span> <span class="o">-</span><span class="n">u</span> <span class="n">dotglob</span>
+</pre></div>
+</div>
+<p>Commit the documentation and push the <code class="docutils literal"><span class="pre">gh-pages</span></code> branch to GitHub.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">-</span><span class="n">A</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Add latest documentation.&quot;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">gh</span><span class="o">-</span><span class="n">pages</span>
+</pre></div>
+</div>
+<p>Then clean up the temporary repository.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">popd</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">fr</span> <span class="n">literacy</span><span class="o">-</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
