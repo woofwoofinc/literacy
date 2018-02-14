@@ -129,7 +129,7 @@ Create the output, ensuring it ends on a newline.
 
       return {
         content: output.join('\n'),
-        sourceMap: sourceMapGenerator.toString(),
+        sourceMap: JSON.parse(sourceMapGenerator.toString()),
       };
     };
 
