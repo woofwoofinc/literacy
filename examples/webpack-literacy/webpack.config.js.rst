@@ -14,7 +14,7 @@ Webpack uses `node-interpret`_ for file extension handling when reading
     const path = require('path');
     const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-Add plugin is to use UglifyJS to perform minification.
+Use UglifyJS to perform minification. This results in significant savings.
 
 .. code-block:: javascript
 
@@ -29,7 +29,8 @@ Enable ``.js.rst`` requires without suffix.
         extensions: ['.js', '.json', '.js.rst']
       },
 
-Include a rule in ``modules.exports.modules`` for handing ``.js.rst`` files.
+Include a rule in ``module.rules`` for handing ``.js.rst`` files. Run the source
+code through ESLint and Babel.
 
 .. code-block:: javascript
 
@@ -47,7 +48,7 @@ Include a rule in ``modules.exports.modules`` for handing ``.js.rst`` files.
       },
 
 We can now use ``.js.rst`` filenames where ``.js`` is accepted. For example, in
-the ``modules.exports.entry`` entrypoint. Since the ``resolve.extensions`` has
+the ``module.exports.entry`` entrypoint. Since the ``resolve.extensions`` has
 been provided for ``.js.rst`` above, this line will work without the explicit
 extension.
 
@@ -82,7 +83,7 @@ And for UglifyJS minification.
 .. code-block:: javascript
 
         new UglifyJsPlugin({
-           sourceMap: true
+          sourceMap: true
         }),
       ],
 

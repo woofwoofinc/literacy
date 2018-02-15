@@ -94,7 +94,7 @@ buildah run $IMAGE -- yarn global add --no-progress webpack-dev-server@2.9.1
 
 ################################################################################
 # Finalise Image
-###############################################################################
+################################################################################
 
 buildah run $IMAGE -- apt-get -qq autoremove
 buildah run $IMAGE -- apt-get -qq clean
